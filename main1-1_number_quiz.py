@@ -16,7 +16,10 @@ while True:
     except:
         print("\"입력 오류!\" 숫자를 입력해주세요~")
     else:
-        if num > ran_num:
+        if num == 0:
+            print('게임을 종료합니다. Good Luck!')
+            break
+        elif num > ran_num:
             print("다운")
         elif num < ran_num:
             print("업")
