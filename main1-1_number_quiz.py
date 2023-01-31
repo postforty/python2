@@ -13,7 +13,9 @@ count = 1
 while True:
     try:
         num = int(input("1 ~ 100 사이의 숫자를 입력하세요: "))
-
+    except:
+        print("\"입력 오류!\" 숫자를 입력해주세요~")
+    else:
         if num > ran_num:
             print("다운")
         elif num < ran_num:
@@ -25,5 +27,3 @@ while True:
             break
 
         count += 1
-    except:
-        print("\"입력 오류!\" 숫자를 입력해주세요~")
