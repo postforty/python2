@@ -11,16 +11,19 @@ ran_num = random.randint(1, 100)
 count = 1
 
 while True:
-    num = int(input("1 ~ 100 사이의 숫자를 입력하세요: "))
+    try:
+        num = int(input("1 ~ 100 사이의 숫자를 입력하세요: "))
 
-    if num > ran_num:
-        print("다운")
-    elif num < ran_num:
-        print("업")
-    elif num == ran_num:
-        print('>'*35)
-        print(f'정답입니다. {count}회 만에 맞췄습니다.')
-        print('<'*35)
-        break
+        if num > ran_num:
+            print("다운")
+        elif num < ran_num:
+            print("업")
+        elif num == ran_num:
+            print('>'*35)
+            print(f'정답입니다. {count}회 만에 맞췄습니다.')
+            print('<'*35)
+            break
 
-    count += 1
+        count += 1
+    except:
+        print("\"입력 오류!\" 숫자를 입력해주세요~")
