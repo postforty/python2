@@ -1,6 +1,19 @@
 import qrcode
 
-qr_data = 'http://www.koreaitjob.co.kr/'
-qr_img = qrcode.make(qr_data)
+file_path = r'qr_sample.txt'
+with open(file_path, 'rt', encoding='UTF8') as f:
+    read_lines = f.readlines()
 
-qr_img.save('koreaitjob.png')
+    for line in read_lines:
+        line = line.strip()
+        print(line)
+
+        qr_data = line
+        qr_img = qrcode.make(qr_data)
+
+        qr_img.save(qr_data + '.png')
+
+# qr_data = 'www.koreaitjob.co.kr'
+# qr_img = qrcode.make(qr_data)
+
+# qr_img.save('koreaitjob.png')
