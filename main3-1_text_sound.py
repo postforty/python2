@@ -2,16 +2,26 @@
 from gtts import gTTS
 import os
 
-
 # os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-text = "안녕하세요. 코리아 IT 아카데미입니다."
+# text = "안녕하세요. 코리아 IT 아카데미입니다."
+# tts = gTTS(text=text, lang='ko')
+# tts.save(r"hi.mp3")
 
-tts = gTTS(text=text, lang='ko')
+file_path = 'sample.txt'
+with open(file_path, 'rt', encoding='UTF8') as f:
+    read_file = f.read()
+
+tts = gTTS(text=read_file, lang='ko')
 tts.save(r"hi.mp3")
 
+# mp3 플레이
+# 1번 방식
 # os.system("hi.mp3")
 
+# 2번 방식
+# https://wikidocs.net/15214
+# pip install pygame
 import pygame
 
 music_file = "hi.mp3"   # mp3 or mid file
