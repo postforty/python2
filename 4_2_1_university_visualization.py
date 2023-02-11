@@ -8,9 +8,7 @@ import pandas as pd
 
 path = '고등교육기관 하반기 주소록(2022).xlsx'
 df_excel = pd.read_excel(path, engine='openpyxl')
-
-df_excel.columns = df_excel.loc[0].tolist()
-
+df_excel.columns = df_excel.loc[4].tolist()
 df_excel = df_excel.drop(index=list(range(0, 5)))
 
 # print(df_excel)
