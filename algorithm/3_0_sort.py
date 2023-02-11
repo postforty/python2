@@ -21,3 +21,4 @@ print("성적이 낮은 순: ", end='')
 
 for i in arr:
     print(i[0], end=', ')
+
