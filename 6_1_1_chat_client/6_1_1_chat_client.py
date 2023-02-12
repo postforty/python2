@@ -1,34 +1,29 @@
-# https://foxtrotin.tistory.com/272
-from socket import *
-import threading
-import time
+import socket
+from _thread import *
 
+HOST = '127.0.0.1'
+PORT = 9999
 
-def send(sock):
-    while True:
-        sendData = input('>>>')
-        sock.send(sendData.encode('utf-8'))
+client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+client_socket.connect((HOST, PORT))
 
+# 서버로부터 메세지를 받는 메소드
+# 스레드로 구동 시켜, 메세지를 보내는 코드와 별개로 작동하도록 처리
+def recv_data(client_socket) :
+    while True :
+        data = client_socket.recv(1024)
 
-def receive(sock):
-    while True:
-        recvData = sock.recv(1024)
-        print('상대방 :', recvData.decode('utf-8'))
-
-
-port = 8081
-
-clientSock = socket(AF_INET, SOCK_STREAM)
-clientSock.connect(('127.0.0.1', port))
-
-print('접속 완료')
-
-sender = threading.Thread(target=send, args=(clientSock,))
-receiver = threading.Thread(target=receive, args=(clientSock,))
-
-sender.start()
-receiver.start()
+        print("recive : ",repr(data.decode()))
+start_new_thread(recv_data, (client_socket,))
+print ('>> Connect Server')
 
 while True:
-    time.sleep(1)
-    pass
+    message = input('')
+    if message == 'quit':
+        close_data = message
+        break
+
+    client_socket.send(message.encode())
+
+
+client_socket.close()
