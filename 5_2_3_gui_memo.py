@@ -29,6 +29,10 @@ def maker():
     lb.pack()
 
 window = Tk()
+
+# https://icon-icons.com/ko/%EC%95%84%EC%9D%B4%EC%BD%98/%EB%A9%94%EB%AA%A8-%ED%8E%B8%EC%A7%91-%EC%97%B0%ED%95%84-%EC%93%B0%EA%B8%B0/109205
+window.iconbitmap('memo.ico')
+
 window.title("메모장")
 window.geometry("400x400+800+300")
 window.resizable(False, False)
