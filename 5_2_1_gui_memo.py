@@ -17,7 +17,7 @@ window.resizable(False, False)
 
 menu = Menu(window)
 menu_1 = Menu(menu, tearoff=0) # tearoff 하위메뉴의 분리 기능 사용 유/무
-menu_1.add_command(label="새파일", command=new_file)
+menu_1.add_command(label="새로 만들기", command=new_file)
 menu_1.add_command(label="저장", command=save_file)
 menu_1.add_separator()
 menu_1.add_command(label="종료", command=window.destroy) # window.destroy 종료
