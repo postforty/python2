@@ -1,10 +1,11 @@
-import tkinter
+import tkinter # "Tk 인터페이스"
 import tkinter.font
 import random
 
 lotto_num = range(1, 46)
 
 def buttonClick():
+    # 버튼 클릭시 로또 번호와 생성되는 리스트박스
     for i in range(5):
         lottoPick = map(str, random.sample(lotto_num, 6))
         lottoPick = ','.join(lottoPick)
@@ -30,6 +31,7 @@ window.geometry("400x200+800+300") # 가로세로의 크기, +800+300은 초기 
 button = tkinter.Button(window, overrelief="solid", text='번호확인', width=15, command=buttonClick, repeatdelay=1000, repeatinterval=500) # 마우스를 누르고 있을때 delay, delay 후 interval
 button.pack()
 
+# 리스트박스 틀
 font = tkinter.font.Font(size = 20)
 listbox = tkinter.Listbox(window, selectmode='extended', height=5, font=font)
 listbox.insert(0, "1회:")
