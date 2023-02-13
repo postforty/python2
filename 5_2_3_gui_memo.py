@@ -2,13 +2,20 @@ from tkinter import *
 from tkinter.filedialog import *
 
 def new_file():
-    pass
+    text_area.delete(1.0,END)
 
 def save_file():
-    pass
+    f = asksaveasfile(mode = 'w', defaultextension=".txt", filetypes=[('Text files', '.txt')])
+    text_save = str(text_area.get(1.0, END))
+    f.write(text_save)
+    f.close()
 
 def maker():
-    pass
+    help_view = Toplevel(window)
+    help_view.geometry("300x50+800+300")
+    help_view.title("만든이")
+    lb = Label(help_view, text = "메모장 만들기")
+    lb.pack()
 
 window = Tk()
 window.title("메모장")
@@ -26,6 +33,12 @@ menu.add_cascade(label="파일", menu=menu_1)
 menu_2 = Menu(menu, tearoff=0)
 menu_2.add_command(label="만든이", command=maker)
 menu.add_cascade(label="만든이", menu=menu_2)
+
+# 텍스트 영역
+text_area = Text(window)
+window.grid_rowconfigure(0, weight=1)
+window.grid_columnconfigure(0, weight=1)
+text_area.grid(sticky = N + E + S + W) # 텍스트 창을 동서남북 방향으로 붙임
 
 window.config(menu=menu)
 
