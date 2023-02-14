@@ -1,3 +1,4 @@
+# https://oceancoding.blogspot.com/2019/05/blog-post_21.html
 # https://foxtrotin.tistory.com/272
 from socket import *
 import threading
