@@ -1,6 +1,7 @@
-# https://pixabay.com/ko/
+# https://pixabay.com/ko/ # 구글 이미지 크롤링으로 대체해도 좋을 듯
 # https://teachablemachine.withgoogle.com/
 
+# pip install tensorflow
 from keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
@@ -9,10 +10,10 @@ import numpy as np
 np.set_printoptions(suppress=True)
 
 # Load the model
-model = load_model("keras_Model.h5", compile=False)
+model = load_model("./converted_keras/keras_Model.h5", compile=False) # TODO
 
 # Load the labels
-class_names = open("labels.txt", "r").readlines()
+class_names = open("./converted_keras/labels.txt", "r", encoding='UTF8').readlines() # TODO
 
 # Create the array of the right shape to feed into the keras model
 # The 'length' or number of images you can put into the array is
@@ -20,7 +21,7 @@ class_names = open("labels.txt", "r").readlines()
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
 # Replace this with the path to your image
-image = Image.open("<IMAGE_PATH>").convert("RGB")
+image = Image.open("./dog/dog-g9aa64ecab_640.jpg").convert("RGB") # TODO
 
 # resizing the image to be at least 224x224 and then cropping from the center
 size = (224, 224)
