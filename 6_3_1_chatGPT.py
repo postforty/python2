@@ -6,7 +6,7 @@ import openai
 
 openai.api_key = "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"
 
-prompt = "Tell me Warren Buffet's portfolio"
+prompt = "Please tell me what the programming language is called Python."
 
 response = (openai.Completion()).create(
         model="text-davinci-003",

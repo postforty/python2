@@ -1,9 +1,6 @@
 # https://developers.naver.com/docs/papago/papago-nmt-example-code.md#python
 
-import os
-import sys
 import urllib.request
-
 import json #TODO
 
 client_id = "c3RaOpS5Ymkf7kgPMLgt" # 개발자센터에서 발급받은 Client ID 값
