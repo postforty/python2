@@ -5,20 +5,17 @@ from bs4 import BeautifulSoup
 import re
 
 def get_exchange_rate():
-# def get_exchange_rate(target1, target2):
     headers = {
         'User-Agent': 'Mozilla/5.0',
         'Content-Type': 'text/html; charset=utf-8'
     }
 
-    # response = requests.get("https://kr.investing.com/currencies/{}-{}".format(target1, target2), headers=headers)
     response = requests.get("https://search.naver.com/search.naver?where=nexearch&sm=top_sug.pre&fbm=1&acr=7&acq=%ED%99%98%EC%9C%A8&qdt=0&ie=utf8&query=%ED%99%98%EC%9C%A8", headers=headers)
     # print(response.content)
     content = BeautifulSoup(response.content, 'html.parser')
     # print(content)
-    # containers = content.find('span', {"data-test":"instrument-price-last"})
-    # content1 = content.find('div', 'rate_table_bx _table')
     containers = content.select('div > table > tbody > tr > td > span')
+    # print(containers)
 
     country = ['미국 USD', '일본 JPY 100', '유럽연합 EUR', '중국 CNY', '영국 GBP', '호주 AUD', '캐나다 CAD', '뉴질랜드 NZD']
     currency_str = []
@@ -29,6 +26,8 @@ def get_exchange_rate():
             result = re.sub('<span>|</span>','', str(val))
             currency_str.append(result)
             currency_float.append(float(re.sub(',','', result)))
+    
+    # print(currency_str)
     
     print('='*30)
     print("{0:|^25}".format(' 환율 변환기 '))
@@ -49,5 +48,4 @@ def get_exchange_rate():
     else:
         print(f'{"{:0,.2f}".format(amount)} {country[select_no]} 변환 결과: ', '{:0,.2f}'.format(currency_float[select_no] * amount), 'KRW')
     
-# get_exchange_rate('usd', 'krw')
 get_exchange_rate()
