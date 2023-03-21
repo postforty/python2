@@ -1,3 +1,3 @@
-# https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=chaejooho09&logNo=220629088058
+# 구글에서 "상장 금테" 검색
 # https://shine94.tistory.com/164
 
