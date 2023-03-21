@@ -1,7 +1,11 @@
-import itertools
+import itertools # 효율적인 루핑을 위한 이터레이터를 만드는 함수
 import zipfile
 
+# import string
+# str = string.digits + string.ascii_letters
 passwd_str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+# list(itertools.product(passwd_str, repeat= 2))
 
 def un_zip(passwd_str, min, max, zFile):
     zFile = zipfile.ZipFile(zFile)

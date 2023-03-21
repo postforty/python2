@@ -55,7 +55,7 @@ def request_geo(road):
 
 # print(request_geo("판교로 242"))
 
-x, y = request_geo("판교로 242") # unpacking
+x, y = request_geo("부산 기장군 장안읍 정관로 1122-1") # unpacking
 
 print(f'경도: {x}')
 print(f'위도: {y}')

@@ -22,10 +22,10 @@ tts.save(r"hi.mp3")
 # 2번 방식
 # https://wikidocs.net/15214
 # pip install pygame
+# pip install pygame —pre
 import pygame
 
 music_file = "hi.mp3"   # mp3 or mid file
-
 
 freq = 16000    # sampling rate, 44100(CD), 16000(Naver TTS), 24000(google TTS)
 bitsize = -16   # signed 16 bit. support 8,-8,16,-16

@@ -1,10 +1,12 @@
 import random
 
 print('*'*35)
-print('{0:*^28}'.format(' 숫자 맞추기 게임 '))
+# print('{0:*^28}'.format(' 숫자 맞추기 게임 '))
+print(f'{" 숫자 맞추기 게임 ":*^28}')
 print('*'*35)
 
 ran_num = random.randint(1, 100)
+# ran_num = random.randint(1, 2)
 
 # print(ran_num)
 

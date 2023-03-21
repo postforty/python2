@@ -2,7 +2,7 @@ import random
 
 result =  []
 while True:
-    num = random.randint(1, 46)
+    num = random.randint(1, 45)
     if len(result) == 0:
         result.append(num)
     try:

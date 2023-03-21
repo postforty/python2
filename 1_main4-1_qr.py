@@ -1,4 +1,10 @@
+# pip install qrcode Pillow
 import qrcode
+
+# qr_data = 'www.koreaitjob.co.kr'
+# qr_img = qrcode.make(qr_data)
+
+# qr_img.save('koreaitjob.png')
 
 file_path = r'qr_sample.txt'
 with open(file_path, 'rt', encoding='UTF8') as f:
@@ -12,8 +18,3 @@ with open(file_path, 'rt', encoding='UTF8') as f:
         qr_img = qrcode.make(qr_data)
 
         qr_img.save(qr_data + '.png')
-
-# qr_data = 'www.koreaitjob.co.kr'
-# qr_img = qrcode.make(qr_data)
-
-# qr_img.save('koreaitjob.png')
