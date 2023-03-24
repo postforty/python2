@@ -16,10 +16,10 @@ tts = gTTS(text=read_file, lang='ko')
 tts.save(r"hi.mp3")
 
 # mp3 플레이
-# 1번 방식
+# [1번 방식]
 # os.system("hi.mp3")
 
-# 2번 방식
+# [2번 방식]
 # https://wikidocs.net/15214
 # pip install pygame
 # pip install pygame —pre
