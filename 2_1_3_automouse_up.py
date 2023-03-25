@@ -8,45 +8,42 @@ import pyperclip
 #     time.sleep(0.1)
 
 # 2차 - 크롬 아이콘 캡쳐
-# start_x = 540
-# start_y = 1165
-# end_x = 570
-# end_y = 1195
+start_x = 460
+start_y = 205
+end_x = 520
+end_y = 280
 
-# pyautogui.screenshot('chrome_ico.png', region=(start_x, start_y, end_x-start_x, end_y-start_y))
+pyautogui.screenshot('chrome_ico.png', region=(start_x, start_y, end_x-start_x, end_y-start_y))
 
 picPosition = pyautogui.locateOnScreen('chrome_ico.png')
 print(picPosition)
 
 pyautogui.center(picPosition)
 pyautogui.doubleClick(picPosition)
-time.sleep(5)
+time.sleep(4)
+pyautogui.hotkey("alt", "space", "x")
+pyautogui.press('hangul')
+time.sleep(2)
 
-
-# 기존 코드
 weather = ["서울 날씨", "부산 날씨", "양산 날씨", "김해 날씨", "강원도 날씨", "제주도 날씨"]
 
-addr_x = 1200
+addr_x = 260
 addr_y = 60
-start_x = 1000
-start_y = 220
-end_x = 1655
-end_y =630
+search_x = 700
+search_y = 150
+start_x = 52
+start_y = 333
+end_x = 680
+end_y =620
 
-# 1차 - 좌표 확인
-# while True:
-#     print(pyautogui.position())
-#     time.sleep(0.1)
 
 for w in weather:
-    pyautogui.moveTo(addr_x, addr_y, 0.2)
-    time.sleep(1)
-    pyautogui.click()
-    time.sleep(1)
+    pyautogui.hotkey("alt", "d")
     pyautogui.write("www.naver.com", interval=0.1)
     pyautogui.write(["enter"])
     time.sleep(3)
-
+    pyautogui.moveTo(search_x, search_y, 0.2)
+    pyautogui.click()
     pyperclip.copy(w)
     pyautogui.hotkey("ctrl", "v")
     time.sleep(1)

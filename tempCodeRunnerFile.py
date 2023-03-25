@@ -1,5 +1,1 @@
-ddr = s.accept()
-            # msg = conn.recv(1024)
-            # print(f'{msg.decode()}')
-            # conn.sendall(msg)
-            # conn.close()
+hangul

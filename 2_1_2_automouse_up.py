@@ -4,12 +4,14 @@ import pyperclip
 
 weather = ["서울 날씨", "부산 날씨", "양산 날씨", "김해 날씨", "강원도 날씨", "제주도 날씨"]
 
-addr_x = 1200
+addr_x = 260
 addr_y = 60
-start_x = 1000
-start_y = 220
-end_x = 1655
-end_y =630
+search_x = 318
+search_y = 150
+start_x = 52
+start_y = 333
+end_x = 680
+end_y =620
 
 # 1차 - 좌표 확인
 # while True:
@@ -24,6 +26,8 @@ for w in weather:
     pyautogui.write(["enter"])
     time.sleep(1)
 
+    pyautogui.moveTo(search_x, search_y, 0.2)
+    pyautogui.click()
     pyperclip.copy(w)
     pyautogui.hotkey("ctrl", "v")
     time.sleep(0.5)
