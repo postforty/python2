@@ -69,4 +69,6 @@ run._element.rPr.rFonts.set(qn('w:eastAsia'), '나눔고딕')
 run.font.size = docx.shared.Pt(20)
 para.alignment = WD_ALIGN_PARAGRAPH.RIGHT
 
+print(dir(doc))
+
 doc.save('certificate_result.docx')
