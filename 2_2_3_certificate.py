@@ -1,3 +1,5 @@
+# 네이버에서 "상장 금테" 검색
+# https://shine94.tistory.com/164
 # pip install python-docx
 import docx
 from docx.oxml.ns import qn
