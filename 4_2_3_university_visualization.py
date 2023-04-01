@@ -7,9 +7,8 @@ from openpyxl import Workbook
 import re
 
 path = '고등교육기관 하반기 주소록(2022).xlsx'
-path = '고등교육기관 하반기 주소록(2022).xlsx'
 df_excel = pd.read_excel(path, engine='openpyxl')
-df_excel.columns = df_excel.loc[0].tolist()
+df_excel.columns = df_excel.loc[4].tolist()
 df_excel = df_excel.drop(index=list(range(0, 5)))
 
 def request_geo(road):
@@ -38,13 +37,16 @@ def request_geo(road):
         x = 0
         y = 0
         return x, y
+    
 
-try:
-    wb = load_workbook('학교주소좌표.xlsx', data_only=True)
-    sheet = wb.active
-except:
-    wb = Workbook()
-    sheet = wb.active
+wb = load_workbook('학교주소좌표.xlsx', data_only=True)
+sheet = wb.active
+# try:
+#     wb = load_workbook('학교주소좌표.xlsx', data_only=True)
+#     sheet = wb.active
+# except:
+#     wb = Workbook() # Workbook 초기화
+#     sheet = wb.active
 
 # print(df_excel)
 name_list = df_excel['학교명'].to_list()
@@ -65,4 +67,4 @@ from pandas import DataFrame
 df = DataFrame(sheet.values)
 print(df)
 
-# wb.save("학교주소좌표.xlsx")
+wb.save("학교주소좌표.xlsx")
