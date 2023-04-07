@@ -39,7 +39,7 @@ listbox.insert(1, "2회:")
 listbox.insert(2, "3회:")
 listbox.insert(3, "4회:")
 listbox.insert(4, "5회:")
-# listbox.delete(1, 2)
+listbox.delete(1, 2)
 listbox.pack()
 
 window.mainloop()
