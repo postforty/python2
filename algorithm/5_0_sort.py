@@ -9,16 +9,15 @@ for i in range(n):
     input_data = input("학생 이름, 성적을 입력하세요(공백으로 구분): ").split()
     arr.append((input_data[0], int(input_data[1])))
 
-# arr = [('aa', 22), ('bb', 11)]
+arr = [('aa', 22), ('bb', 11)]
 
 # lamb_func = lambda x: x[1]
 # print(lamb_func(arr[0]))
 
 arr = sorted(arr, key=lambda x: x[1])
-# arr = sorted(arr, key=lambda x: x[1], reverse=True)
+# arr = sorted(arr, key=lambda x: x[1], reverse=True) # 내림차순
 
 print("성적이 낮은 순: ", end='')
 
 for i in arr:
     print(i[0], end=', ')
-
