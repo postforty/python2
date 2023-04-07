@@ -2,9 +2,9 @@
 # pip install folium
 import folium
 
-map = folium.Map(location=[35.232846735, 129.074661279], zoom_start=7) # 0 ~ 18
+map = folium.Map(location=[35.152417295, 129.059590906], zoom_start=7) # 0 ~ 18
 
-marker = folium.Marker([35.232846735, 129.074661279], popup='부산대학교', icon=folium.Icon(color='blue'))
+marker = folium.Marker([35.152417295, 129.059590906], popup='코리아 IT 아카데미', icon=folium.Icon(color='blue'))
 
 marker.add_to(map)
 
