@@ -41,14 +41,14 @@ class WindowClass(QMainWindow, from_class):
         elif btn_value == "=":
             print("=")
             try:
-                # resultValue = eval(self.text_value.lstrip("0")) # 왼쪽이 0이 있는 숫자 001 같은 경우 발생하는 에러 대응 코드
-                resultValue = eval(self.text_value) # eval은 문자열 수식을 계산한 값 출력, cmd에서 사용법 보여 줄것!
+                resultValue = eval(self.text_value.lstrip("0")) # 왼쪽이 0이 있는 숫자 001 같은 경우 발생하는 에러 대응 코드
+                # resultValue = eval(self.text_value) # eval은 문자열 수식을 계산한 값 출력, python interpreter에서 사용법 보여 줄것!
                 self.le_view.setText(str(resultValue))
             except:
                 self.le_view.setText("error")
         else:
-            # if btn_value == '×':
-            #     btn_value = "*"
+            if btn_value == '×':
+                btn_value = "*"
             self.text_value = self.text_value + btn_value
             print(self.text_value)
             self.le_view.setText(self.text_value)

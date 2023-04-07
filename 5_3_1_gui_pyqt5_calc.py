@@ -26,6 +26,7 @@ class WindowClass(QMainWindow, from_class):
 # app.exec_()
 
 if __name__=="__main__":
+    print(sys.argv)
     app = QApplication(sys.argv) # sys.argv는 python으로 실행한 시스템 argument(Command Line Argument)를 확인
     myWindow = WindowClass()
     myWindow.show()
