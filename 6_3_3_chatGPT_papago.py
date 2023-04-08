@@ -1,8 +1,10 @@
 # https://developers.naver.com/docs/papago/papago-nmt-example-code.md#python
+# https://developers.naver.com/docs/papago # 이 주소를 안내할 것!
 
 import urllib.request
 import json #TODO
 
+# Application > Application 등록
 client_id = "c3RaOpS5Ymkf7kgPMLgt" # 개발자센터에서 발급받은 Client ID 값
 client_secret = "CQthN1Y7xi" # 개발자센터에서 발급받은 Client Secret 값
 
