@@ -1,6 +1,7 @@
 # pip install PyQt5
 # pip install pyqt5-tools
-# 설치 에러 발생시
+
+# UI 편집기 설치
 # pip install pyside2
 # C:\Users\사용자\AppData\Local\Programs\Python\Python310-32\Lib\site-packages\PySide2
 # 설치 에러 발생시 직접 설치
