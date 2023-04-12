@@ -1,0 +1,1 @@
+C:\Users\J\Documents\GitHub\python2\venvs\mysite\Scripts\deactivate.bat
