@@ -1,5 +1,5 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% extends 'base.html' %}
+{% block content %}
 <h1>{{question.subject}}</h1>
 <div>{{question.content}}</div>
 <h5>{{question.answer_set.count}}개의 답변이 있습니다.</h5>
@@ -15,3 +15,4 @@
     <textarea name="content" id="content" rows="15"></textarea>
     <input type="submit" value="답변등록">
 </form>
+{% endblock %}
