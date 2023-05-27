@@ -25,6 +25,7 @@ for w in weather:
     # time.sleep(0.5)
     pyautogui.hotkey("alt", "tab")
     pyautogui.hotkey("alt", "d")
+    
     pyautogui.write("www.naver.com", interval=0.1)
     pyautogui.write(["enter"])
     time.sleep(1)
