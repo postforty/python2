@@ -13,6 +13,5 @@ df = pd.DataFrame(
 
 print(df.values.tolist())
 
-
 # pip install openpyxl 해야 함
-# df.to_excel('certificate.xlsx', index=False, header=False)
+df.to_excel('certificate.xlsx', index=False, header=False)
