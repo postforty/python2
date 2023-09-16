@@ -4,6 +4,12 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+# 웹 브라우저와 웹 서버 간에 정보를 주고받을 때, URL에는 ASCII 문자만 사용 가능
+# URL 인코딩(Percent Encoding)은 이러한 제한을 극복하기 위한 방법
+# [동작 순서]
+# 1. 문자를 ASCII 코드 포인트로 변환
+# 2. ASCII 코드 포인트를 16진수로 표현
+# 3. 16진수 앞에 '%'를 붙여 URL에 사용 가능한 형태로 만듦
 url = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&mra=bkEw&pkid=68&os=5664043&qvt=0"
 param = {"query": "영화 기생충 리뷰"}
 response = requests.get(url, params=param)
