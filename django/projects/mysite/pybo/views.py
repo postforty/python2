@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.views import View
 
 
-class BarChartView(View):
-    def get(self, request):
-        return render(request, "pybo/bar_chart.html")
+def index(request):
+    return render(request, "pybo/base.html")
+
+
+def chart(request):
+    return render(request, "pybo/chart.html")

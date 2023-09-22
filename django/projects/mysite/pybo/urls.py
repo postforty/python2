@@ -2,6 +2,9 @@ from django.urls import path
 
 from . import views
 
+app_name = "pybo"
+
 urlpatterns = [
-    path("", views.BarChartView.as_view(), name="bar_chart"),
+    path("", views.index, name="index"),
+    path("chart/", views.chart, name="chart"),
 ]
