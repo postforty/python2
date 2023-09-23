@@ -1,27 +1,45 @@
 {% extends './base.html' %}
 {% block content %}
+{% if chart_data %}
+<h1>현재 기온 습도</h1>
 <canvas id="myBarChart" width="400" height="400"></canvas>
 <script>
     var ctx = document.getElementById('myBarChart').getContext('2d');
+
+    // `safe` 필터는 Django 템플릿 엔진에서 HTML 이스케이프를 비활성화하고, 원본 텍스트를 그대로 출력하도록 지시하는 데 사용됩니다. 이 필터를 사용하지 않으면 Django 템플릿 엔진은 출력할 데이터를 HTML 이스케이프하여 보안을 강화하려고 시도합니다.
+    // 그러나 JavaScript 코드나 HTML 코드와 같이 원본 텍스트를 그대로 출력해야 하는 경우, `safe` 필터를 사용하여 이스케이프를 비활성화해야 합니다.그렇지 않으면 특수 문자가 이스케이프되어 HTML과 JavaScript 코드의 동작에 문제가 발생할 수 있습니다.
+    // 따라서 `{{ chart_data|safe }}`를 사용하여 Django 컨텍스트에서 JavaScript 코드에 데이터를 전달할 때, 해당 데이터가 원본 텍스트로 출력되도록 하여 JavaScript 코드에서 사용할 수 있게 합니다.이렇게 하면 데이터가 이스케이프되지 않아 문제 없이 사용할 수 있습니다.
+    // 단, 이렇게 사용할 때에는 데이터의 안전성을 직접 확인하고 안전하지 않은 데이터를 출력하지 않도록 주의해야 합니다.
+    var chartData = {{ chart_data| safe }};
+
     var myBarChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Label 1', 'Label 2', 'Label 3'],
-            datasets: [{
-                label: 'Sample Data',
-                data: [12, 19, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                ],
-                borderWidth: 1,
-            }],
+            labels: chartData[0],
+            datasets: [
+                {
+                    label: '온도',
+                    data: chartData[1],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 1,
+                },
+                {
+                    label: '습도',
+                    data: chartData[2],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1,
+                },
+            ],
         },
         options: {
             scales: {
@@ -29,7 +47,11 @@
                     beginAtZero: true,
                 },
             },
+            // maintainAspectRatio: false, // 차트가 화면 비율을 유지하지 않도록 설정
+            responsive: false, // 차트가 브라우저 크기에 반응하도록 설정
         },
     });
+
 </script>
+{% endif %}
 {% endblock %}
