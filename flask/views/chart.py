@@ -55,11 +55,10 @@ def weather_chart():
 
     # 차트를 이미지로 저장
     img = BytesIO()
-    # plt.savefig(img, format="png")
-    plt.savefig("static/weather_chart.png", format="png")
-    img.seek(0)
+    plt.savefig(img, format="png")
 
-    plt.show()
+    # img.seek(0)
+
     plt.close()
 
     return img.getvalue()
