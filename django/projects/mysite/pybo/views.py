@@ -8,6 +8,10 @@ def index(request):
     return render(request, "pybo/base.html")
 
 
+def home(request):
+    return render(request, "pybo/home.html")
+
+
 def chart(request):
     # https://www.weather.go.kr/ > 관측기후 > 육상 > 도시별관측
     response = requests.get("https://www.weather.go.kr/w/obs-climate/land/city-obs.do")
