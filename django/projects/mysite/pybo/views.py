@@ -29,7 +29,7 @@ def chart(request):
             if td.find("a"):
                 point = td.find("a").text
                 temperature = tds[5].text
-                humidity = tds[9].text
+                humidity = tds[10].text
 
                 data.append([point, temperature, humidity])
 
@@ -45,6 +45,7 @@ def chart(request):
     city_name_list = []
     temperature_list = []
     humidity_list = []
+    print(selected_cities)
     for i in selected_cities:
         city_name_list.append(i[0])
         temperature_list.append(float(i[1]))
