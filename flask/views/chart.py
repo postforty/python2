@@ -23,6 +23,7 @@ def weather_chart():
         for td in tds:
             if td.find("a"):
                 point = td.find("a").text
+                # 차트에서 사용할 수 있도록 문자열을 실수, 정수로 각각 변경해야 함
                 temperature = float(tds[5].text)
                 humidity = int(tds[10].text)
 
