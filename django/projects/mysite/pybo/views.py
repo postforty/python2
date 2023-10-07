@@ -8,6 +8,10 @@ def index(request):
     return render(request, "pybo/base.html")
 
 
+def qr(request):
+    return render(request, "pybo/qr.html")
+
+
 def home(request):
     return render(request, "pybo/home.html")
 
