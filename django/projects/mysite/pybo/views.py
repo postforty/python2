@@ -52,6 +52,7 @@ def chart(request):
     print(selected_cities)
     for i in selected_cities:
         city_name_list.append(i[0])
+        # 온도, 습도 값의 타입 실수형으로 변경
         temperature_list.append(float(i[1]))
         humidity_list.append(float(i[2]))
 
