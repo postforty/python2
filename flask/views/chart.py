@@ -24,15 +24,13 @@ def weather_chart():
             if td.find("a"):
                 point = td.find("a").text
                 temperature = float(tds[5].text)
-                humidity = int(tds[9].text)
+                humidity = int(tds[10].text)
 
                 data.append([point, temperature, humidity])
 
     # print(data)
 
-    df = pd.DataFrame(
-        data, columns=["point", "temperature", "humidity"]
-    )  # csv 파일을 읽어서 DataFrame 객체로 만듦. 인덱스 항목(컬럼)은 point로 설정
+    df = pd.DataFrame(data, columns=["point", "temperature", "humidity"])
     df.set_index("point", inplace=True)
     city_df = df.loc[["서울", "인천", "대전", "대구", "광주", "부산", "울산"]]
     print(city_df)
@@ -53,7 +51,7 @@ def weather_chart():
     ax.set_ylabel("기온/습도", fontsize=12)  # y축 정보 표시
     ax.legend(["기온", "습도"], fontsize=12)  # 범례 지정
 
-    # 차트를 이미지로 저장
+    # 차트 이미지 생성
     img = BytesIO()
     plt.savefig(img, format="png")
 
