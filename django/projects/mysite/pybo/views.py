@@ -23,8 +23,6 @@ def chart(request):
 
     table = soup.find("table", id="weather_table")
 
-    table
-
     data = []
     for tr in table.find_all("tr"):
         tds = list(tr.find_all("td"))
@@ -43,8 +41,6 @@ def chart(request):
     for i in data:
         if i[0] in ["서울", "인천", "대전", "대구", "광주", "부산", "울산"]:
             selected_cities.append(i)
-
-    selected_cities
 
     city_name_list = []
     temperature_list = []
