@@ -35,8 +35,6 @@ def chart(request):
 
                 data.append([point, temperature, humidity])
 
-                # csv가 아닌 리스트로 만들기
-                # 수업 진행은 이 방식을 먼저 할 것!
     selected_cities = []
     for i in data:
         if i[0] in ["서울", "인천", "대전", "대구", "광주", "부산", "울산"]:
