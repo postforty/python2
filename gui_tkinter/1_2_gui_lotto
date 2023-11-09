@@ -1,0 +1,17 @@
+import random
+import tkinter
+
+# lotto_num = range(1, 46)
+
+# for i in range(5):
+#     print(random.sample(lotto_num, 6))
+
+window = tkinter.Tk()
+window.title("로또")
+window.resizable(False, False)
+window.geometry("400x200+-1200+300")
+
+button = tkinter.Button(window, overrelief="solid", width=15, text='번호확인')
+button.pack()
+
+window.mainloop()

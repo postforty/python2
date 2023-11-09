@@ -1,0 +1,1 @@
+python tkinter를 이용해 메모장을 만들고 있습니다.

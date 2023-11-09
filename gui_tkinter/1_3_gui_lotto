@@ -1,0 +1,32 @@
+import random
+import tkinter
+import tkinter.font
+
+lotto_num = range(1, 46)
+
+def buttonClick():
+    for i in range(5):
+        lotto_pick = map(str, random.sample(lotto_num, 6))
+        lotto_pick = ",".join(lotto_pick)
+        lotto_pick = f'{i+1}회: {lotto_pick}'
+        listbox.insert(i, lotto_pick)
+
+window = tkinter.Tk()
+window.title("로또")
+window.resizable(False, False)
+window.geometry("400x200+-1200+300")
+window.iconbitmap(r"C:\Users\ITPS\Desktop\python2\tkinter_gui\lotto.ico")
+
+button = tkinter.Button(window, overrelief="solid", width=15, text='번호확인', command=buttonClick)
+button.pack()
+
+font = tkinter.font.Font(size=20)
+listbox = tkinter.Listbox(window, height=5, selectmode="extended", font=font)
+listbox.insert(0, "1회:")
+listbox.insert(1, "2회:")
+listbox.insert(2, "3회:")
+listbox.insert(3, "4회:")
+listbox.insert(4, "5회:")
+listbox.pack()
+
+window.mainloop()
