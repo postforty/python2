@@ -3,8 +3,6 @@ import requests
 
 # pip install beautifulsoup4
 from bs4 import BeautifulSoup
-import re
-
 
 def get_exchange_rate():
     # headers = {"User-Agent": "Mozilla/5.0", "Content-Type": "text/html; charset=utf-8"}
@@ -27,6 +25,7 @@ def get_exchange_rate():
     result = []
 
     for li in li_list:
+        # print(li)
         if li.find('span'):
             # print(li.find('span').text)
             # print(li.find('strong').text)
@@ -37,7 +36,8 @@ def get_exchange_rate():
     # print(result)
 
     print("=" * 30)
-    print("{0:|^25}".format(" 환율 변환기 "))
+    # print("{0:|^25}".format(" 환율 변환기 "))
+    print(f"{" 환율 변환기 ":|^25}")
     print("=" * 30)
 
     for idx, val in enumerate(result):
@@ -53,13 +53,15 @@ def get_exchange_rate():
     if result[no][0] == "일본":
         print(
             '일본 JPY 100 변환 결과: ',
-            "{:0,.2f}".format(result[no][2] * amount / 100),
+            # "{:0,.2f}".format(result[no][2] * amount / 100),
+            f"{result[no][2] * amount / 100:0,.2f}",
             "KRW",
         )
     # 그외 통화
     else:
         print(f'{result[no][0]} 변환 결과: ',
-            "{:0,.2f}".format(result[no][2] * amount),
+            # "{:0,.2f}".format(result[no][2] * amount),
+            f"{result[no][2] * amount:0,.2f}",
             "KRW",
         )
 
