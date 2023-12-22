@@ -22,6 +22,7 @@ review_list = soup.find_all("span", class_="this_text")
 
 # print(review_list)
 
+# 정규 표현식
 # for review in review_list:
 #     result = re.sub('<span class="this_text">|</span>', "", str(review))
 #     result = re.sub("&lt;", "<", str(result))
