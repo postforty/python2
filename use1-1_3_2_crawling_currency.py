@@ -37,7 +37,7 @@ def get_exchange_rate():
 
     print("=" * 30)
     # print("{0:|^25}".format(" 환율 변환기 "))
-    print(f"{" 환율 변환기 ":|^25}")
+    print(f"{'환율 변환기':|^25}")
     print("=" * 30)
 
     for idx, val in enumerate(result):
