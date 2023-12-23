@@ -1,3 +1,5 @@
+# pip install tensorflow
+# pip install pillow
 from keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
@@ -16,7 +18,6 @@ while True:
     if quiz == 0:
         break
     # 수정 코드 - 끝
-
 
     image = Image.open(f"{quiz}.jpg").convert("RGB")
 
