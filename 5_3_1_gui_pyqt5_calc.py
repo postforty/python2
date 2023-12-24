@@ -1,5 +1,4 @@
 # pip install PyQt5
-# pip install pyqt5-tools
 
 # UI 편집기 설치
 # https://build-system.fman.io/qt-designer-download
@@ -16,7 +15,7 @@ class WindowClass(QMainWindow, from_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-
+        self.setWindowTitle("계산기")
 
 # import os
 # print(os.path.abspath(__file__))

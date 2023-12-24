@@ -1,3 +1,7 @@
+# pip install PyQt5
+
+# UI 편집기 설치
+# https://build-system.fman.io/qt-designer-download
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -9,6 +13,7 @@ class WindowClass(QMainWindow, from_class):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowTitle("계산기")
 
         self.btn_C.clicked.connect(self.btn_clicked)
         self.btn_0.clicked.connect(self.btn_clicked)
@@ -30,16 +35,16 @@ class WindowClass(QMainWindow, from_class):
         self.le_view.setEnabled(False)
 
         self.text_value = ""
-    
+
     def btn_clicked(self):
         btn_value = self.sender().text()
         # print(btn_value)
         if btn_value == 'C':
-            print("clear")
+            # print("clear")
             self.le_view.setText("0")
             self.text_value = ""
         elif btn_value == "=":
-            print("=")
+            # print("=")
             try:
                 resultValue = eval(self.text_value.lstrip("0")) # 왼쪽이 0이 있는 숫자 001 같은 경우 발생하는 에러 대응 코드
                 # resultValue = eval(self.text_value) # eval은 문자열 수식을 계산한 값 출력, python interpreter에서 사용법 보여 줄것!
@@ -50,7 +55,7 @@ class WindowClass(QMainWindow, from_class):
             if btn_value == '×':
                 btn_value = "*"
             self.text_value = self.text_value + btn_value
-            print(self.text_value)
+            # print(self.text_value)
             self.le_view.setText(self.text_value)
 
 if __name__=="__main__":

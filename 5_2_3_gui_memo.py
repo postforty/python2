@@ -7,17 +7,17 @@ def new_file():
 def save_file():
     # 탐색창에서 입력한 파일 경로 생성
     f = asksaveasfile(mode = 'w', defaultextension=".txt", filetypes=[('Text files', '.txt')])
-    
+
     print(f) # <_io.TextIOWrapper name='C:/Users/J/Documents/GitHub/python2/memo.txt' mode='w' encoding='cp949'>
     print(f.name) # asksaveasfile로 생성된 파일 경로
-    
+
     # 텍스트 영역 처음부터 끝까지
     text_save = str(text_area.get(1.0, END))
 
     # with를 사용하면 close()할 필요가 없다.
     # with open(f.name, 'wt', encoding='utf8') as f2:
     #     ft.write(text_save)
-    
+
     # 인코딩하여 한글 깨짐 문제를 해결
     f2 = open(f.name, 'wt', encoding='utf8')
     f2.write(text_save)
@@ -32,7 +32,7 @@ def maker():
 
 window = Tk()
 
-# https://icon-icons.com/ko/%EC%95%84%EC%9D%B4%EC%BD%98/%EB%A9%94%EB%AA%A8-%ED%8E%B8%EC%A7%91-%EC%97%B0%ED%95%84-%EC%93%B0%EA%B8%B0/109205
+# https://icon-icons.com/ko/
 window.iconbitmap('memo.ico')
 
 window.title("메모장")
