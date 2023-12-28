@@ -14,8 +14,6 @@ def weather_chart():
 
     table = soup.find("table", id="weather_table")
 
-    table
-
     data = []
     for tr in table.find_all("tr"):
         tds = list(tr.find_all("td"))
@@ -42,7 +40,8 @@ def weather_chart():
 
     # AttributeError: module 'matplotlib' has no attribute 'font_manager' 에러가 발생하면 해당 코드를 주석 처리한 후 실행한 후, 주석 해제 후 다시 실행하면 됨
     # .get_name() 누락 주의!!!
-    font_path = "C:/Windows/Fonts/HYGPRM.TTF"
+    font_path = r'C:\Windows\Fonts\batang.ttc'
+
     font_name = font_manager.FontProperties(fname=font_path).get_name()
     rc("font", family=font_name)
 

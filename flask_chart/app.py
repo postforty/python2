@@ -1,6 +1,6 @@
 # pip install Flask
 import matplotlib.pyplot as plt
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template
 from io import BytesIO
 import matplotlib
 from views.chart import weather_chart

@@ -1,4 +1,7 @@
 # pip install flask
+# flask run : 파일명이 app.py인 경우 실행 명령어
+# python 파일명.py : 그 밖의 경우
+# https://wikidocs.net/81238 : 디버깅 모드 활성화 방법등
 from flask import Flask, render_template
 
 app = Flask(__name__)
