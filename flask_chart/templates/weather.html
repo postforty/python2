@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Matplotlib Chart in Flask</title>
+    <title>Chart in Flask</title>
   </head>
 
   <body>
@@ -10,6 +10,7 @@
       <button onclick="window.location.href='/'">차트 닫기</button>
     </div>
     <div>
+      <h2>현재 기온/습도</h2>
       <img src="data:image/png;base64,{{ chart }}" alt="Weather Chart" />
       <!-- <img src="{{ url_for('static', filename='weather_chart.png') }}" alt="Weather Chart"> -->
     </div>

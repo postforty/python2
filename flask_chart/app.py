@@ -4,6 +4,8 @@ from flask import Flask, render_template
 from io import BytesIO
 import matplotlib
 from views.chart import weather_chart
+from views.chartjs import weather_chartjs
+
 import base64
 
 matplotlib.use("agg")
@@ -64,6 +66,10 @@ def weather():
     # 이미지를 HTML 템플릿에 전달
     return render_template("weather.html", chart=img_base64)
 
+@app.route("/chartjs")
+def chartjs():
+    result = weather_chartjs()
+    return render_template("chartjs.html", data=result)
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True, port=3000)

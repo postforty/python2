@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Chart in Flask</title>
+  </head>
 
-<head>
-    <title>Matplotlib Chart in Flask</title>
-</head>
-
-<body>
+  <body>
     <h1>Matplotlib Chart in Flask</h1>
     <div>
-        <button onclick="window.location.href='/'">차트 닫기</button>
+      <button onclick="window.location.href='/'">차트 닫기</button>
     </div>
     <div>
-        <img src="{{ url_for('static', filename='chart.png') }}" alt="Chart">
+      <h2>샘플 차트</h2>
+      <img src="{{ url_for('static', filename='chart.png') }}" alt="Chart" />
     </div>
-</body>
-
+  </body>
 </html>
