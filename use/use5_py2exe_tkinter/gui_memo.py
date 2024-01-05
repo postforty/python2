@@ -27,7 +27,7 @@ def save_file():
     f2.close()
 
 def maker():
-    help_view = Toplevel(window)
+    help_view = Toplevel(window) # 외부 윈도우 창 생성
     help_view.geometry("300x50+800+300")
     help_view.title("만든이")
     lb = Label(help_view, text = "메모장 만들기")
@@ -60,6 +60,6 @@ window.grid_rowconfigure(0, weight=1)
 window.grid_columnconfigure(0, weight=1)
 text_area.grid(sticky = N + E + S + W) # 텍스트 창을 동서남북 방향으로 붙임
 
-window.config(menu=menu)
+window.config(menu=menu) # 이 코드가 없으면 tkinter 기본 메뉴가 보여짐
 
 window.mainloop()

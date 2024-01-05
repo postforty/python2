@@ -39,7 +39,7 @@ class WindowClass(QMainWindow, from_class):
         self.btn_mul.clicked.connect(self.btn_clicked)
         self.btn_div.clicked.connect(self.btn_clicked)
 
-        self.le_view.setEnabled(False)
+        self.le_view.setEnabled(False) # input disable 처리
 
         self.text_value = ""
 
@@ -64,8 +64,9 @@ class WindowClass(QMainWindow, from_class):
             self.text_value = self.text_value + btn_value
             # print(self.text_value)
             self.le_view.setText(self.text_value)
-
+print(__name__)
 if __name__=="__main__":
+    print(sys.argv)
     app = QApplication(sys.argv)
     myWindow = WindowClass()
     myWindow.show()
