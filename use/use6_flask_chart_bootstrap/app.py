@@ -12,16 +12,13 @@ matplotlib.use("agg")
 
 app = Flask(__name__)
 
-
 # @app.route("/")
 # def hello():
 #     return "hello"
 
-
 @app.route("/")
 def hello():
-    return render_template("index.html")
-
+    return render_template("home.html")
 
 @app.route("/chart")
 def home():

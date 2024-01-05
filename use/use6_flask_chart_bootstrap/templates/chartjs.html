@@ -1,101 +1,92 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Chart in Flask</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- 기본 템플릿 안에 삽입될 내용 End -->
-  </head>
+{% extends 'base.html' %} {% block content %}
+<h1>Chart.js in Flask</h1>
+<div>
+  <h2>현재 기온/습도</h2>
+  <canvas id="myBarChart" width="800" height="400"></canvas>
+  <script>
+    // Flask에서 전달한 데이터 가져오기
+    var data = {{ data | tojson | safe }};
 
-  <body>
-    <h1>Chart.js in Flask</h1>
-    <div>
-      <button onclick="window.location.href='/'">차트 닫기</button>
-    </div>
-    <div>
-      <h2>현재 기온/습도</h2>
-      <canvas id="myBarChart" width="800" height="400"></canvas>
-      <script>
-        // Flask에서 전달한 데이터 가져오기
-        var data = {{ data | tojson | safe }};
+    // getContext('2d')는 HTML5 <canvas> 요소에서 2D 그래픽 컨텍스트를 가져오는 메서드
+    // .getContext('2d') 생략 불가
+    var ctx = document.getElementById("myBarChart").getContext("2d");
 
-        // getContext('2d')는 HTML5 <canvas> 요소에서 2D 그래픽 컨텍스트를 가져오는 메서드
-        // .getContext('2d') 생략 불가
-        var ctx = document.getElementById("myBarChart").getContext("2d");
+    // case1 - https://www.chartjs.org/docs/latest/charts/bar.html
+    // var myBarChart = {
+    //   labels: [1, 2, 3, 4, 5, 6, 7],
+    //   datasets: [
+    //     {
+    //       label: "My First Dataset",
+    //       data: [65, 59, 80, 81, 56, 55, 40],
+    //       backgroundColor: [
+    //         "rgba(255, 99, 132, 0.2)",
+    //         "rgba(255, 159, 64, 0.2)",
+    //         "rgba(255, 205, 86, 0.2)",
+    //         "rgba(75, 192, 192, 0.2)",
+    //         "rgba(54, 162, 235, 0.2)",
+    //         "rgba(153, 102, 255, 0.2)",
+    //         "rgba(201, 203, 207, 0.2)",
+    //       ],
+    //       borderColor: [
+    //         "rgb(255, 99, 132)",
+    //         "rgb(255, 159, 64)",
+    //         "rgb(255, 205, 86)",
+    //         "rgb(75, 192, 192)",
+    //         "rgb(54, 162, 235)",
+    //         "rgb(153, 102, 255)",
+    //         "rgb(201, 203, 207)",
+    //       ],
+    //       borderWidth: 1,
+    //     },
+    //   ],
+    // };
 
-        // case1 - https://www.chartjs.org/docs/latest/charts/bar.html
-        // var myBarChart = {
-        //   labels: [1, 2, 3, 4, 5, 6, 7],
-        //   datasets: [
-        //     {
-        //       label: "My First Dataset",
-        //       data: [65, 59, 80, 81, 56, 55, 40],
-        //       backgroundColor: [
-        //         "rgba(255, 99, 132, 0.2)",
-        //         "rgba(255, 159, 64, 0.2)",
-        //         "rgba(255, 205, 86, 0.2)",
-        //         "rgba(75, 192, 192, 0.2)",
-        //         "rgba(54, 162, 235, 0.2)",
-        //         "rgba(153, 102, 255, 0.2)",
-        //         "rgba(201, 203, 207, 0.2)",
-        //       ],
-        //       borderColor: [
-        //         "rgb(255, 99, 132)",
-        //         "rgb(255, 159, 64)",
-        //         "rgb(255, 205, 86)",
-        //         "rgb(75, 192, 192)",
-        //         "rgb(54, 162, 235)",
-        //         "rgb(153, 102, 255)",
-        //         "rgb(201, 203, 207)",
-        //       ],
-        //       borderWidth: 1,
-        //     },
-        //   ],
-        // };
+    // // 바 차트 생성
+    // var myChart = new Chart(ctx, {
+    //   type: "bar", // 차트 유형
+    //   data: myBarChart, // 데이터 설정
+    // });
 
-        // // 바 차트 생성
-        // var myChart = new Chart(ctx, {
-        //   type: "bar", // 차트 유형
-        //   data: myBarChart, // 데이터 설정
-        // });
+    // case2 - 기상청 날씨 정보
+    const myBarChart = {
+      labels: data[0],
+      datasets: [
+        {
+          label: "온도",
+          data: data[1],
+          backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+          borderColor: ["rgba(255, 99, 132, 1)"],
+          borderWidth: 1,
+        },
+        {
+          label: "습도",
+          data: data[2],
+          backgroundColor: ["rgba(54, 162, 235, 0.2)"],
+          borderColor: ["rgba(54, 162, 235, 1)"],
+          borderWidth: 1,
+        },
+      ],
+    };
 
-        // case2 - 기상청 날씨 정보
-        const myBarChart = {
-          labels: data[0],
-          datasets: [
-            {
-              label: "온도",
-              data: data[1],
-              backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-              borderColor: ["rgba(255, 99, 132, 1)"],
-              borderWidth: 1,
-            },
-            {
-              label: "습도",
-              data: data[2],
-              backgroundColor: ["rgba(54, 162, 235, 0.2)"],
-              borderColor: ["rgba(54, 162, 235, 1)"],
-              borderWidth: 1,
-            },
-          ],
-        };
+    const myBarChartOptions = {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+      // maintainAspectRatio: false, // 차트가 화면 비율을 유지하지 않도록 설정
+      responsive: false, // 차트가 브라우저 크기에 반응하도록 설정
+    };
 
-        const myBarChartOptions = {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-          // maintainAspectRatio: false, // 차트가 화면 비율을 유지하지 않도록 설정
-          responsive: false, // 차트가 브라우저 크기에 반응하도록 설정
-        };
+    // 바 차트 생성
+    const myChart = new Chart(ctx, {
+      type: "bar", // 차트 유형
+      data: myBarChart, // 데이터 설정
+      options: myBarChartOptions,
+    });
+  </script>
+</div>
+</body>
 
-        // 바 차트 생성
-        const myChart = new Chart(ctx, {
-          type: "bar", // 차트 유형
-          data: myBarChart, // 데이터 설정
-          options: myBarChartOptions,
-        });
-      </script>
-    </div>
-  </body>
 </html>
+{% endblock %}
