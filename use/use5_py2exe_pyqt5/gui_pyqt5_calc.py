@@ -64,9 +64,9 @@ class WindowClass(QMainWindow, from_class):
             self.text_value = self.text_value + btn_value
             # print(self.text_value)
             self.le_view.setText(self.text_value)
-print(__name__)
+# print(__name__)
 if __name__=="__main__":
-    print(sys.argv)
+    # print(sys.argv)
     app = QApplication(sys.argv)
     myWindow = WindowClass()
     myWindow.show()
