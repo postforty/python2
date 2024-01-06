@@ -60,6 +60,6 @@ window.grid_rowconfigure(0, weight=1)
 window.grid_columnconfigure(0, weight=1)
 text_area.grid(sticky = N + E + S + W) # 텍스트 창을 동서남북 방향으로 붙임
 
-window.config(menu=menu) # 이 코드가 없으면 tkinter 기본 메뉴가 보여짐
+window.config(menu=menu) # 이 코드가 있어야 창이 표시됨
 
 window.mainloop()

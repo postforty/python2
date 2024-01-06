@@ -33,8 +33,8 @@ def weather_chartjs():
     df.set_index("point", inplace=True)
     city_df = df.loc[["서울", "인천", "대전", "대구", "광주", "부산", "울산"]]
     # print(city_df)
-    
-    result = [city_df.index.tolist()] + city_df.values.T.tolist()
+
+    result = [city_df.index.tolist()] + city_df.values.T.tolist() # 데이터 프레임을 중첩 리스트 [[지점],[온도],[습도]] 형태로 반환
     # print(result)
 
     return result
