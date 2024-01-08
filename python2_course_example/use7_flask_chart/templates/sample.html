@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>예제 차트 | Web Application 만들기</title>
+  </head>
+
+  <body>
+    <h1>현재 기온/습도</h1>
+    <div>
+      <button onclick="window.location.href='/'">차트 닫기</button>
+    </div>
+    <div>
+      <h2>예제 차트</h2>
+      <img src="{{ url_for('static', filename='chart.png') }}" alt="Chart" />
+    </div>
+  </body>
+</html>
