@@ -3,9 +3,6 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.keys import Keys
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-import time
-import pandas as pd
-from datetime import datetime
 
 # 브라우저 꺼짐 방지 옵션
 # from selenium.webdriver.chrome.options import Options
@@ -39,6 +36,12 @@ for dt, dd in zip(dt_elements, dd_elements):
 # 다음 탭 렌더링
 elem = driver.find_element(By.CSS_SELECTOR, "a.cmm_pg_next.on")
 elem.send_keys(Keys.RETURN)
+
+# dt 태그 찾기
+dt_elements = driver.find_elements(By.CSS_SELECTOR,"dt span")
+
+# dd 태그 찾기
+dd_elements = driver.find_elements(By.CSS_SELECTOR,"dd span strong")
 
 for dt, dd in zip(dt_elements, dd_elements):
     if dt.text:
