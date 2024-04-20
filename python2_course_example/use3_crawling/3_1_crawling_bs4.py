@@ -2,7 +2,7 @@
 # pip install requests
 import requests
 from bs4 import BeautifulSoup
-import re
+# import re
 
 # 웹 브라우저와 웹 서버 간에 정보를 주고받을 때, URL에는 ASCII 문자만 사용 가능
 # URL 인코딩(Percent Encoding)은 이러한 제한을 극복하기 위한 방법
