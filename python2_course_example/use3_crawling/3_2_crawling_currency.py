@@ -8,7 +8,7 @@ def get_exchange_rate():
     # headers = {"User-Agent": "Mozilla/5.0", "Content-Type": "text/html; charset=utf-8"}
 
     url = "https://search.naver.com/search.naver"
-    param = param = {"query": "환율"}
+    param = {"query": "환율"}
     response = requests.get(url, params=param)
 
     # text는 수신한 byte단위의 데이터를 자동으로 decode 하여 사용자가 보기 좋게 만들어주며, content는 수신한 byte단위의 데이터를 있는 그대로 보여줍니다.
