@@ -1,40 +1,44 @@
-# pip install tensorflow
-# pip install pillow
+# 2024-04-28 작동하는 텐서플로우 버전 : https://pypi.org/project/tensorflow/2.15.1/
 from keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
 
+# Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
 
-model = load_model("keras_model.h5", compile=False)
-class_names = open("labels.txt", "r").readlines()
+# Load the model
+model = load_model(r"C:\Users\J\Documents\GitHub\python2\python2_course_example\use4_tensorflow_cat_dog\keras_model.h5", compile=False)
 
+# Load the labels
+class_names = open(r"C:\Users\J\Documents\GitHub\python2\python2_course_example\use4_tensorflow_cat_dog\labels.txt", "r").readlines()
+
+# Create the array of the right shape to feed into the keras model
+# The 'length' or number of images you can put into the array is
+# determined by the first position in the shape tuple, in this case 1
 data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-# 수정 코드 - 시작
-while True:
-    quiz = int(input("문제 이미지 번호를 입력하세요 >>> "))
+# Replace this with the path to your image
+image = Image.open(r"C:\Users\J\Documents\GitHub\python2\python2_course_example\use4_tensorflow_cat_dog\cat_182.jpg").convert("RGB")
 
-    if quiz == 0:
-        break
-    # 수정 코드 - 끝
+# resizing the image to be at least 224x224 and then cropping from the center
+size = (224, 224)
+image = ImageOps.fit(image, size, Image.Resampling.LANCZOS)
 
-    image = Image.open(f"{quiz}.jpg").convert("RGB")
+# turn the image into a numpy array
+image_array = np.asarray(image)
 
-    size = (224, 224)
-    image = ImageOps.fit(image, size, Image.Resampling.LANCZOS)
+# Normalize the image
+normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
 
-    image_array = np.asarray(image)
+# Load the image into the array
+data[0] = normalized_image_array
 
-    normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
+# Predicts the model
+prediction = model.predict(data)
+index = np.argmax(prediction)
+class_name = class_names[index]
+confidence_score = prediction[0][index]
 
-    data[0] = normalized_image_array
-
-    prediction = model.predict(data)
-    index = np.argmax(prediction)
-    class_name = class_names[index]
-    confidence_score = prediction[0][index]
-
-    # 수정 코드
-    print("정답:", '고양이' if int(class_name.split(' ')[0]) == 0 else '강아지', end=", ")
-    print(f"신뢰도: {confidence_score*100:.1f}%")
+# Print prediction and confidence score
+print("Class:", class_name[2:], end="")
+print("Confidence Score:", confidence_score)
