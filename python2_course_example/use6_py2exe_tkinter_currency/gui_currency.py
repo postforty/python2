@@ -41,6 +41,8 @@ for dt, dd in zip(dt_elements, dd_elements):
 elem = driver.find_element(By.CSS_SELECTOR, "a.cmm_pg_next.on")
 elem.send_keys(Keys.RETURN)
 
+time.sleep(0.5)
+
 # dt 태그 찾기
 dt_elements = driver.find_elements(By.CSS_SELECTOR,"dt span")
 
@@ -76,6 +78,7 @@ def convert_currency(currency_list):
 
     # 변환 결과를 텍스트 레이블에 표시
     result_currency.config(text=result)
+    input_box.delete(0, 'end') # 처음부터 끝까지 지우기
 
 # Tkinter 창 생성
 window=Tk()
@@ -145,3 +148,5 @@ result_currency.place(x=100, y=450)
 
 # Tkinter 창 실행
 window.mainloop()
+
+# 마지막 미션 : auto-py-to-exe로 exe 파일 생성하기
