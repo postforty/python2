@@ -135,7 +135,7 @@ input_box = Entry(window, width=15)
 input_box.place(x=80, y=400, height=25)
 
 # 버튼
-input_button = Button(window, text="변환", width=7, height=1, command=lambda: convert_currency(result))
+input_button = Button(window, text="변환", width=7, height=1, command=lambda: convert_currency(result)) # 매개변수를 전달하기 위해 람다 함수 사용
 input_button.place(x=200, y=400)
 
 # 변환 결과 레이블 생성
