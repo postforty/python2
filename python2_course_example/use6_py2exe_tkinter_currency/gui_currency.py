@@ -4,21 +4,18 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.keys import Keys
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import time
 
-# 브라우저 꺼짐 방지 옵션
+# ! 창 숨기는 옵션 추가
 # from selenium.webdriver.chrome.options import Options
 # chrome_options = Options()
-# chrome_options.add_experimental_option("detach", True)
-# driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+# chrome_options.add_argument("headless")
 
-# 창 숨기는 옵션 추가
-from selenium.webdriver.chrome.options import Options
-chrome_options = Options()
-chrome_options.add_argument("headless")
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+# pip install chromedriver-autoinstaller
+import chromedriver_autoinstaller
+driver = webdriver.Chrome(service=ChromeService(chromedriver_autoinstaller.install()))
+# driver = webdriver.Chrome(service=ChromeService(chromedriver_autoinstaller.install()), options=chrome_options) # !창 숨기는 옵션 추가
 
 URL='https://search.naver.com/search.naver?query=환율'
 driver.get(url=URL)
@@ -71,13 +68,13 @@ def convert_currency(currency_list):
 
     # JPY 100
     if currency_list[currency_id][0] == "일본":
-        result = f"{currency_list[currency_id][2] * input_value / 100:0,.2f}KRW"
+        convert_result = f"{currency_list[currency_id][2] * input_value / 100:0,.2f}KRW"
     # 그외 통화
     else:
-        result = f"{currency_list[currency_id][2] * input_value:0,.2f}KRW"
+        convert_result = f"{currency_list[currency_id][2] * input_value:0,.2f}KRW"
 
     # 변환 결과를 텍스트 레이블에 표시
-    result_currency.config(text=result)
+    result_currency.config(text=convert_result)
     input_box.delete(0, 'end') # 처음부터 끝까지 지우기
 
 # Tkinter 창 생성
@@ -150,3 +147,6 @@ result_currency.place(x=100, y=450)
 window.mainloop()
 
 # 마지막 미션 : auto-py-to-exe로 exe 파일 생성하기
+# !보안 문제로 변환 에러 발생시 조치 방법
+# 시작 > 설정 > 업데이트 및 보안 > Windows 보안 > 바이러스 및 위협 방지 > 설정 관리를 선택합니다.
+# 실시간 보호 설정을 꺼짐으로 전환하고 예를 선택하여 확인합니다.
