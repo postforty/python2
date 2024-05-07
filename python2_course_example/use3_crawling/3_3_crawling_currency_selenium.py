@@ -1,30 +1,23 @@
 # pip install selenium
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
 
-# 브라우저 꺼짐 방지 옵션
-# from selenium.webdriver.chrome.options import Options
-# chrome_options = Options()
-# chrome_options.add_experimental_option("detach", True)
-# driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
-
 # ! 창 숨기는 옵션 추가
-# from selenium.webdriver.chrome.options import Options
-# chrome_options = Options()
-# chrome_options.add_argument("headless")
+from selenium.webdriver.chrome.options import Options
+chrome_options = Options()
+chrome_options.add_argument("headless")
 
-# case1 : ChromeDriverManager
-# from webdriver_manager.chrome import ChromeDriverManager
-# driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
-
-# case2 : chromedriver_autoinstaller
-# pip install chromedriver-autoinstaller
-import chromedriver_autoinstaller
+# * case1 : chromedriver_autoinstaller
+# * pip install chromedriver-autoinstaller
+# import chromedriver_autoinstaller
 # driver = webdriver.Chrome(service=ChromeService(chromedriver_autoinstaller.install()), options=chrome_options) # !창 숨기는 옵션 추가
-driver = webdriver.Chrome(service=ChromeService(chromedriver_autoinstaller.install()))
+# driver = webdriver.Chrome(service=ChromeService(chromedriver_autoinstaller.install()))
+
+# case2 : 웹드라이버 무설치
+driver = webdriver.Chrome(options=chrome_options) # ! 창 숨기는 옵션 추가
+# driver = webdriver.Chrome()
 
 URL='https://search.naver.com/search.naver?query=환율'
 driver.get(url=URL)

@@ -2,7 +2,6 @@
 크롤링
 '''
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 import time
@@ -12,10 +11,8 @@ import time
 # chrome_options = Options()
 # chrome_options.add_argument("headless")
 
-# pip install chromedriver-autoinstaller
-import chromedriver_autoinstaller
-driver = webdriver.Chrome(service=ChromeService(chromedriver_autoinstaller.install()))
-# driver = webdriver.Chrome(service=ChromeService(chromedriver_autoinstaller.install()), options=chrome_options) # !창 숨기는 옵션 추가
+# driver = webdriver.Chrome(options=chrome_options) # ! 창 숨기는 옵션 추가
+driver = webdriver.Chrome()
 
 URL='https://search.naver.com/search.naver?query=환율'
 driver.get(url=URL)
