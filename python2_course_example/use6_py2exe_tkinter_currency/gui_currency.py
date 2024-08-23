@@ -77,8 +77,12 @@ def convert_currency(currency_list):
 # Tkinter 창 생성
 window=Tk()
 
+import os
+PATH = os.path.dirname(__file__)
+print(PATH)
+
 # https://icon-icons.com/ko/
-window.iconbitmap('currency.ico')
+window.iconbitmap(PATH + '\currency.ico')
 
 window.title("환율 변환기")
 window.geometry("300x500")

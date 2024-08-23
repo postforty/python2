@@ -5,7 +5,7 @@ import numpy as np
 
 # 경로 가져오기
 import os
-PATH = os.path.dirname(os.path.abspath(__file__))
+PATH = os.path.dirname(__file__) # ! __file__는 현재 수행중인 코드를 담고 있는 파일의 경로(파일명 포함)
 print(PATH)
 
 # Disable scientific notation for clarity
