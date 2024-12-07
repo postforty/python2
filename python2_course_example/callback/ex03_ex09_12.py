@@ -13,3 +13,4 @@ def callback():
 
 
 timer(5, callback)
+print("메인 스레드에서 다른 작업 수행 중...")
