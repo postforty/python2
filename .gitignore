@@ -5,3 +5,4 @@
 *.jpg
 venvs/*
 django/venvs/*
+.env
