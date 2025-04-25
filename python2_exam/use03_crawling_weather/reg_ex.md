@@ -78,6 +78,17 @@
 - `match.group(2)`는 두 번째 그룹에 매칭된 문자열을 반환합니다.
 - ...
 
+```
+import re
+
+match = re.search(r"(\d+)[.](d*)", "123.45")
+
+print(match.group())   # 전체 일치: '123.45'
+print(match.group(0))  # 전체 일치: '123.45'
+print(match.group(1))  # 첫 번째 그룹 (d+): '123'
+print(match.group(2))  # 두 번째 그룹 (d*): '45'
+```
+
 ### 8. 추가 학습 자료
 
 - Python `re` 모듈 공식 문서: [https://docs.python.org/3/library/re.html](https://docs.python.org/3/library/re.html)
