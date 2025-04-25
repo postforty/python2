@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>오늘의 추천 코디</title>
+<style>
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f8ff; /* Light sky blue background */
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.suggestion {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.clothing-items {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.clothing-item {
+    background-color: #e6f7ff; /* Lighter sky blue */
+    border: 1px solid #add8e6; /* Light blue border */
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px;
+    width: calc(50% - 20px);
+    box-sizing: border-box;
+}
+
+.clothing-item h3 {
+    color: #4682b4; /* Steel blue */
+    margin-top: 0;
+}
+
+.clothing-item p {
+    color: #778899; /* Light slate gray */
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>오늘의 추천 코디 (2025년 4월 25일)</h1>
+    <p class="suggestion">현재 기온은 10~15℃로 맑은 날씨입니다. 가벼운 아우터를 챙기시는 것을 추천합니다.</p>
+    <div class="clothing-items">
+        <div class="clothing-item">
+            <h3>상의</h3>
+            <p>긴팔 티셔츠 또는 얇은 니트</p>
+        </div>
+        <div class="clothing-item">
+            <h3>하의</h3>
+            <p>청바지 또는 면바지</p>
+        </div>
+        <div class="clothing-item">
+            <h3>겉옷</h3>
+            <p>가디건, 바람막이, 또는 얇은 자켓</p>
+        </div>
+        <div class="clothing-item">
+            <h3>신발</h3>
+            <p>운동화 또는 단화</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
