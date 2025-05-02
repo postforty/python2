@@ -14,7 +14,7 @@ style.font.size = docx.shared.Pt(12)
 
 para = doc.add_paragraph()
 # run = para.add_run('\n\n')
-run = para.add_run(" 제 2020-001 호\n")
+run = para.add_run(" 제 2025-001 호\n")
 run.font.name = "HY궁서"
 run._element.rPr.rFonts.set(qn("w:eastAsia"), "HY궁서")
 run.font.size = docx.shared.Pt(20)
@@ -22,9 +22,9 @@ run.font.size = docx.shared.Pt(20)
 para = doc.add_paragraph()
 run = para.add_run("\n\n")
 run = para.add_run("수 료 증")
-# run.font.name = '나눔고딕'
 run.bold = True
-# run._element.rPr.rFonts.set(qn('w:eastAsia'), '나눔고딕')
+run.font.name = "HY궁서"
+run._element.rPr.rFonts.set(qn("w:eastAsia"), "HY궁서")
 run.font.size = docx.shared.Pt(40)
 para.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
@@ -45,7 +45,7 @@ run.font.name = "나눔고딕"
 run._element.rPr.rFonts.set(qn("w:eastAsia"), "나눔고딕")
 run.font.size = docx.shared.Pt(20)
 
-run = para.add_run(" 교육날짜: 2022.12.17 ~ 2023.2.26\n")
+run = para.add_run(" 교육날짜: 2025.03.09 ~ 2025.05.03\n")
 run.font.name = "나눔고딕"
 run._element.rPr.rFonts.set(qn("w:eastAsia"), "나눔고딕")
 run.font.size = docx.shared.Pt(20)
@@ -70,7 +70,5 @@ run.bold = True
 run._element.rPr.rFonts.set(qn("w:eastAsia"), "나눔고딕")
 run.font.size = docx.shared.Pt(20)
 para.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-
-print(dir(doc))
 
 doc.save("certificate_result.docx")
