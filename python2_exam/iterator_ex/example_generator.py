@@ -23,7 +23,7 @@ greeting = WordSplitter("Hello Python!")
 print(greeting)  # WordSplit(['Hello', 'Python!'])
 print(next(greeting))  # Hello
 print(next(greeting))  # Python!
-print(next(greeting))  # StopIteration
+# print(next(greeting))  # StopIteration
 
 print()
 
@@ -35,17 +35,20 @@ print()
 
 class WordSplitterGenerator:
     def __init__(self, text):
-        self._idx = 0
         self._text = text.split(' ')
 
-    def __next__(self):
-        print('Called __next__')
-        try:
-            word = self._text[self._idx]
-        except IndexError:
-            raise StopIteration('Stopped Iteration.')
-        self._idx += 1
-        return word
+    def __iter__(self):
+        for word in self._text:
+            yield word
+        return
 
     def __repr__(self):  # 출력될 수 있는 표현(printable representation)
-        return f'WordSplit({self._text})'
+        return f'WordSplitGenerator({self._text})'
+
+
+greeting = WordSplitterGenerator("Hello Python!")
+print(greeting)
+greeting_iter = iter(greeting)
+print(next(greeting_iter))
+print(next(greeting_iter))
+# print(next(greeting_iter)) # StopIteration
