@@ -30,8 +30,8 @@ def main():
 
     start_time = time.time()
 
-    with futures.ThreadPoolExecutor() as executor:
-        # with futures.ProcessPoolExecutor() as executor:
+    with futures.ThreadPoolExecutor() as executor:  # 멀티 스레드 처리
+        # with futures.ProcessPoolExecutor() as executor: # 멀티 프로세스 처리
         result = executor.map(sum_generator, WORK_LIST)
 
     end_time = time.time() - start_time
@@ -42,3 +42,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# 실행할 때 CPU 사용량은 윈도우의 "작업 관리자"에서 확인 가능
