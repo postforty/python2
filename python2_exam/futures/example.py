@@ -16,7 +16,7 @@ import os
 import time
 from concurrent import futures
 
-WORK_LIST = [100000, 1000000, 10000000, 100000000]
+WORK_LIST = [1000000, 10000000, 100000000, 1000000000]
 
 
 def sum_generator(n):
@@ -30,13 +30,14 @@ def main():
 
     start_time = time.time()
 
-    with futures.ThreadPoolExecutor() as executor:  # 멀티 스레드 처리
-        # with futures.ProcessPoolExecutor() as executor: # 멀티 프로세스 처리
+    # with futures.ThreadPoolExecutor() as executor:  # 멀티 스레드 처리
+    with futures.ProcessPoolExecutor() as executor:  # 멀티 프로세스 처리
         result = executor.map(sum_generator, WORK_LIST)
 
     end_time = time.time() - start_time
 
     msg = '\n Results: {}, Time: {:.2f}\n'
+    # Results: [500000500000, 50000005000000, 5000000050000000, 500000000500000000], Time: 39.13
     print(msg.format(list(result), end_time))
 
 
