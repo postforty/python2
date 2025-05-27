@@ -30,6 +30,11 @@ def main():
 
     start_time = time.time()
 
+    # concurrent.futures는 ThreadPoolExecutor를 사용할 경우 동시성을,
+    # ProcessPoolExecutor를 사용할 경우 병렬성을 제공합니다.
+    # ThreadPoolExecutor는 GIL의 제약 때문에 실제 병렬성을 제공하지 못하고 동시성만 제공합니다.
+    # ProcessPoolExecutor는 GIL의 제약 없이 병렬성을 제공합니다.
+
     # with futures.ThreadPoolExecutor() as executor:  # 멀티 스레드 처리
     with futures.ProcessPoolExecutor() as executor:  # 멀티 프로세스 처리
         result = executor.map(sum_generator, WORK_LIST)
