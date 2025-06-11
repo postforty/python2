@@ -39,3 +39,5 @@ if __name__ == "__main__":
     asyncio.run(main()) # Python 3.7+에서 asyncio.run 사용
     duration = timeit.default_timer() - start_time
     print(f"Total time: {duration:.4f} seconds")
+
+# 참고 자료 : https://postforty.tistory.com/578
