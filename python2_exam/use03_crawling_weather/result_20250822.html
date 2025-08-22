@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 드레스 코드: 폭염 경고</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #fff;
+            --secondary-bg: #f9f9f9;
+            --accent-color: #ff9900; /* Warm orange */
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #eee;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --warning-color: #dc3545; /* Red for warning */
+            --recommendation-color: #4CAF50; /* Green for recommendations */
+            --tip-bg-color: #e0f2f7; /* Light blue for tips */
+            --tip-border-color: #03a9f4; /* Darker blue for tip border */
+            --tip-text-color: #01579b; /* Even darker blue for tip text */
+            --temp-color: #d35400; /* Darker orange for temperature values */
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f2f5;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: var(--primary-bg);
+            border-radius: 15px;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            padding: 30px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .current-weather {
+            background-color: #fff8e1; /* Light yellow for hot weather info */
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #ffe0b2;
+            box-shadow: 0 4px 10px rgba(255, 153, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            align-items: center;
+        }
+
+        .weather-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background-color: #fffaf0; /* Even lighter background */
+            border-radius: 8px;
+            border: 1px solid #ffeebf;
+        }
+
+        .weather-item .icon {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+        }
+        .weather-item.warning .icon {
+            color: var(--warning-color);
+        }
+
+        .weather-item p {
+            margin: 0;
+            font-size: 0.95em;
+            color: var(--light-text);
+        }
+
+        .weather-item strong {
+            font-size: 1.2em;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .weather-item .temp-value {
+            font-size: 1.5em;
+            color: var(--temp-color);
+            font-weight: 700;
+        }
+
+        .weather-item.heatwave {
+            background-color: #ffebee; /* Light red for warning background */
+            border-color: #ef9a9a;
+        }
+        .weather-item.heatwave strong {
+            color: var(--warning-color);
+            font-size: 1.3em;
+        }
+
+        .dress-recommendation {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: left;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .dress-recommendation h2 {
+            color: var(--recommendation-color);
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--recommendation-color);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .outfit-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .outfit-list li {
+            background-color: var(--primary-bg);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            font-size: 1em;
+        }
+
+        .outfit-list li .item-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+            color: #607d8b; /* Blue-grey for item icons */
+            flex-shrink: 0;
+        }
+        .outfit-list li strong {
+            color: var(--text-color);
+        }
+
+        .general-tip {
+            background-color: var(--tip-bg-color);
+            border-left: 5px solid var(--tip-border-color);
+            padding: 15px;
+            border-radius: 8px;
+            color: var(--tip-text-color);
+            font-size: 1em;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .general-tip .icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .current-weather {
+                grid-template-columns: 1fr 1fr;
+            }
+            .dress-recommendation h2 {
+                font-size: 1.5em;
+            }
+            .outfit-list {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            .current-weather {
+                grid-template-columns: 1fr;
+            }
+            .weather-item {
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+            }
+            .weather-item .icon {
+                margin-bottom: 0;
+            }
+            .weather-item p {
+                font-size: 0.9em;
+            }
+            .weather-item strong {
+                font-size: 1.1em;
+            }
+            .weather-item .temp-value {
+                font-size: 1.3em;
+            }
+            .dress-recommendation h2 {
+                font-size: 1.3em;
+            }
+            .outfit-list li {
+                font-size: 0.95em;
+            }
+            .general-tip {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌞 오늘의 드레스 코드 추천 👗</h1>
+        
+        <div class="current-weather">
+            <div class="weather-item">
+                <span class="icon">⏰</span>
+                <p><strong>현재 시각</strong></p>
+                <p>11:00</p>
+            </div>
+            <div class="weather-item">
+                <span class="icon">☁️</span>
+                <p><strong>날씨</strong></p>
+                <p>구름 많음</p>
+            </div>
+            <div class="weather-item">
+                <span class="icon">🌡️</span>
+                <p><strong>기온</strong></p>
+                <p><span class="temp-value">31℃</span></p>
+            </div>
+            <div class="weather-item">
+                <span class="icon">🥵</span>
+                <p><strong>체감 기온</strong></p>
+                <p><span class="temp-value">32℃</span></p>
+            </div>
+            <div class="weather-item">
+                <span class="icon">💧</span>
+                <p><strong>습도</strong></p>
+                <p>70%</p>
+            </div>
+            <div class="weather-item heatwave warning">
+                <span class="icon">❗</span>
+                <p><strong>폭염 영향</strong></p>
+                <p>경고</p>
+            </div>
+        </div>
+
+        <div class="dress-recommendation">
+            <h2>✨ 폭염 경고! 시원하고 쾌적한 여름 스타일링 ✨</h2>
+            <ul class="outfit-list">
+                <li>
+                    <span class="item-icon">👕</span>
+                    <div>
+                        <strong>상의:</strong>
+                        <p>얇고 밝은 색상의 반팔 또는 민소매 티셔츠, 린넨/면 블라우스</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="item-icon">👖</span>
+                    <div>
+                        <strong>하의:</strong>
+                        <p>통기성 좋은 반바지, 치마, 와이드 팬츠 (린넨, 면 소재)</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="item-icon">👟</span>
+                    <div>
+                        <strong>신발:</strong>
+                        <p>샌들, 슬리퍼, 메시 소재의 가볍고 통풍 잘 되는 운동화</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="item-icon">👒</span>
+                    <div>
+                        <strong>액세서리:</strong>
+                        <p>챙 넓은 모자, 선글라스, 휴대용 선풍기, 양산</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="item-icon">🧴</span>
+                    <div>
+                        <strong>필수템:</strong>
+                        <p>선크림 (자외선 차단), 충분한 물 또는 이온 음료</p>
+                    </div>
+                </li>
+                 <li>
+                    <span class="item-icon">🚫</span>
+                    <div>
+                        <strong>피할 것:</strong>
+                        <p>두껍고 달라붙는 옷, 어두운 색상, 합성섬유 (폴리에스테르 등)</p>
+                    </div>
+                </li>
+            </ul>
+            <p class="general-tip">
+                <span class="icon">💡</span> <strong>주의사항:</strong> 폭염 경고가 내려진 매우 무더운 날씨입니다.
+                최대한 실내 활동 위주로 계획하시고, 외출 시에는 가볍고 시원한 옷차림으로
+                탈수 예방을 위해 수분을 충분히 섭취하며, 햇볕 노출을 최소화해주세요.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
