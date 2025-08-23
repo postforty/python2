@@ -168,6 +168,7 @@ def start_server():
         socket.AF_INET, socket.SOCK_STREAM)  # 서버 소켓 생성 (IPv4, TCP)
     server_socket.setsockopt(
         socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)  # 소켓 옵션 설정 (주소 재사용)
+
     # 타임아웃 설정: accept()에서 무한정 대기하지 않고 주기적으로 server_running 확인
     # 1초마다 타임아웃 (KeyboardInterrupt에 의한 종료를 더 잘 감지하기 위함)
     server_socket.settimeout(1.0)
