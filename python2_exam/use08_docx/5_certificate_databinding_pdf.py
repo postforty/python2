@@ -3,6 +3,7 @@ import docx
 from docx.oxml.ns import qn
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
+# pdf 변환
 # pip install docx2pdf
 from docx2pdf import convert
 
