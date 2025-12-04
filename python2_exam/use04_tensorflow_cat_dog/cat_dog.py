@@ -1,3 +1,4 @@
+# Teachable Machine: https://teachablemachine.withgoogle.com/
 # 2024-04-28 작동하는 텐서플로우 버전 : https://pypi.org/project/tensorflow/2.15.1/
 from keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
