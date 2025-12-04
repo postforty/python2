@@ -13,19 +13,6 @@ def print_menu():
     print("5. 종료하기")
     print("=" * 30)
 
-def view_tasks(todos):
-    """현재 할 일 목록을 출력합니다."""
-    print("\n[ 할 일 목록 ]")
-    if not todos:
-        print("등록된 할 일이 없습니다.")
-        return
-
-    # enumerate를 사용하여 인덱스와 값을 함께 가져옵니다.
-    # 인덱스는 0부터 시작하지만, 사용자에게는 1부터 보여줍니다.
-    for index, todo in enumerate(todos, start=1):
-        status = "[x]" if todo["done"] else "[ ]"
-        print(f"{index}. {status} {todo['title']}")
-
 def add_task(todos):
     """새로운 할 일을 추가합니다."""
     title = input("\n추가할 할 일 내용을 입력하세요: ")
@@ -38,6 +25,19 @@ def add_task(todos):
     new_todo = {"title": title, "done": False}
     todos.append(new_todo)
     print(f"'{title}' 할 일이 추가되었습니다.")
+
+def view_tasks(todos):
+    """현재 할 일 목록을 출력합니다."""
+    print("\n[ 할 일 목록 ]")
+    if not todos:
+        print("등록된 할 일이 없습니다.")
+        return
+
+    # enumerate를 사용하여 인덱스와 값을 함께 가져옵니다.
+    # 인덱스는 0부터 시작하지만, 사용자에게는 1부터 보여줍니다.
+    for index, todo in enumerate(todos, start=1):
+        status = "[x]" if todo["done"] else "[ ]"
+        print(f"{index}. {status} {todo['title']}")
 
 def complete_task(todos):
     """할 일을 완료 상태로 변경합니다."""
