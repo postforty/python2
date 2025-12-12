@@ -1,41 +1,63 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM Content Loaded: Script is running.');
-
     const cardContainer = document.getElementById('restaurant-cards');
     const modal = document.getElementById('modal');
     const closeModalButton = document.getElementById('close-modal');
     const filtersContainer = document.getElementById('category-filters');
+    const searchInput = document.getElementById('search-input');
 
     let allRestaurants = []; // To store all restaurant data
+    let debounceTimer;
 
-    if (!cardContainer || !modal || !closeModalButton || !filtersContainer) {
+    if (!cardContainer || !modal || !closeModalButton || !filtersContainer || !searchInput) {
         console.error('Error: A critical element was not found in the DOM!');
         return;
     }
 
     // Fetch data, set up filters, and build cards
     fetch('list.json')
-        .then(response => {
-            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            allRestaurants = data.filter(item => item.title); // Store only crawled items
-            console.log('All crawled restaurants:', allRestaurants);
-            
+            allRestaurants = data.filter(item => item.title);
             setupCategoryFilters();
             renderCards(allRestaurants); // Initial render of all cards
         })
         .catch(error => {
             console.error('Error fetching restaurant data:', error);
-            cardContainer.innerHTML = '<p class="error-message">데이터를 불러오는 데 실패했습니다. 콘솔을 확인하세요.</p>';
+            cardContainer.innerHTML = '<p class="error-message">데이터를 불러오는 데 실패했습니다.</p>';
         });
+
+    function debounce(func, delay) {
+        return function(...args) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                func.apply(this, args);
+            }, delay);
+        };
+    }
+
+    function applyFilters() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const activeCategoryButton = filtersContainer.querySelector('.filter-btn.active');
+        const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : '전체';
+
+        let filteredRestaurants = allRestaurants;
+
+        // 1. Filter by category
+        if (selectedCategory !== '전체') {
+            filteredRestaurants = filteredRestaurants.filter(r => r.category === selectedCategory);
+        }
+
+        // 2. Filter by search term
+        if (searchTerm) {
+            filteredRestaurants = filteredRestaurants.filter(r => r.title.toLowerCase().includes(searchTerm));
+        }
+
+        renderCards(filteredRestaurants);
+    }
 
     function setupCategoryFilters() {
         const categories = ['전체', ...new Set(allRestaurants.map(r => r.category).filter(Boolean))];
-        console.log('Found categories:', categories);
         
-        filtersContainer.innerHTML = '';
         categories.forEach(category => {
             const button = document.createElement('button');
             button.className = 'filter-btn';
@@ -48,20 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         filtersContainer.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'BUTTON') return;
-
-            // Update active button style
-            filtersContainer.querySelector('.active').classList.remove('active');
-            e.target.classList.add('active');
-
-            const selectedCategory = e.target.dataset.category;
-            console.log('Filter clicked:', selectedCategory);
-
-            if (selectedCategory === '전체') {
-                renderCards(allRestaurants);
-            } else {
-                const filteredRestaurants = allRestaurants.filter(r => r.category === selectedCategory);
-                renderCards(filteredRestaurants);
+            if (e.target.tagName === 'BUTTON') {
+                filtersContainer.querySelector('.active').classList.remove('active');
+                e.target.classList.add('active');
+                applyFilters();
             }
         });
     }
@@ -69,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCards(restaurants) {
         cardContainer.innerHTML = '';
         if (restaurants.length === 0) {
-            cardContainer.innerHTML = '<p>해당 카테고리의 식당이 없습니다.</p>';
+            cardContainer.innerHTML = '<p>해당 조건의 식당이 없습니다.</p>';
             return;
         }
         restaurants.forEach(restaurant => {
@@ -82,36 +94,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function createRestaurantCard(restaurant) {
         const card = document.createElement('div');
         card.className = 'card';
-
-        const img = document.createElement('img');
-        img.className = 'card-img';
-        img.src = restaurant.imageUrl || 'https://via.placeholder.com/300x200.png?text=No+Image';
-        img.alt = restaurant.title;
-
-        const content = document.createElement('div');
-        content.className = 'card-content';
-
-        const title = document.createElement('h3');
-        title.className = 'card-title';
-        title.textContent = restaurant.title;
-
-        const category = document.createElement('p');
-        category.className = 'card-category';
-        category.textContent = restaurant.category || '기타';
-
-        content.appendChild(title);
-        content.appendChild(category);
-        card.appendChild(img);
-        card.appendChild(content);
-
+        card.innerHTML = `
+            <img class="card-img" src="${restaurant.imageUrl || 'https://via.placeholder.com/300x200.png?text=No+Image'}" alt="${restaurant.title}">
+            <div class="card-content">
+                <h3 class="card-title">${restaurant.title}</h3>
+                <p class="card-category">${restaurant.category || '기타'}</p>
+            </div>
+        `;
         return card;
     }
 
     function openModal(restaurant) {
-        console.log('openModal called for:', restaurant.title);
-
         document.getElementById('modal-img').src = restaurant.imageUrl || 'https://via.placeholder.com/600x250.png?text=No+Image';
         document.getElementById('modal-title').textContent = restaurant.title || '제목 없음';
+        // ... (rest of modal population logic is the same)
         document.getElementById('modal-category').textContent = restaurant.category || '기타';
         document.getElementById('modal-description').textContent = restaurant.description || '설명 없음';
         document.getElementById('modal-visitor-reviews').textContent = restaurant.visitorReviews || '정보 없음';
@@ -135,7 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modal) modal.classList.remove('active');
     }
 
-    // Event listeners for closing the modal
+    // Event Listeners
+    searchInput.addEventListener('input', debounce(applyFilters, 300));
     closeModalButton.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
