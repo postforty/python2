@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종목 분석 대시보드</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;404;700&display=swap');
+
+        :root {
+            --bg-color: #1a1a2e;
+            --card-bg: #16213e;
+            --text-color: #e0e0e0;
+            --header-color: #0f3460;
+            --accent-color: #e94560;
+            --positive-color: #28a745;
+            --negative-color: #dc3545;
+            --hold-color: #ffc107; /* Warm yellow/orange for HOLD */
+            --border-color: #0f3460;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .dashboard {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        header {
+            background-color: var(--header-color);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        header .subtitle {
+            margin-top: 10px;
+            font-size: 1.1em;
+            color: rgba(224, 224, 224, 0.8);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.6em;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .metric-item .label {
+            font-size: 0.9em;
+            color: rgba(224, 224, 224, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .metric-item .value {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .metric-item .value.positive { color: var(--positive-color); }
+        .metric-item .value.negative { color: var(--negative-color); }
+        .metric-item .value.highlight { color: var(--accent-color); }
+
+        .strategy-card {
+            grid-column: span 1; /* Adjust if needed for layout */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .strategy-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--bg-color);
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.5); /* Hold color shadow */
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .strategy-action.buy { background-color: var(--positive-color); box-shadow: 0 0 15px rgba(40, 167, 69, 0.5); }
+        .strategy-action.hold { background-color: var(--hold-color); box-shadow: 0 0 15px rgba(255, 193, 7, 0.5); }
+        .strategy-action.watch { background-color: #17a2b8; box-shadow: 0 0 15px rgba(23, 162, 184, 0.5); } /* Info blue for Watch */
+        .strategy-action.sell { background-color: var(--negative-color); box-shadow: 0 0 15px rgba(220, 53, 69, 0.5); }
+
+        .strategy-action .emoji {
+            font-size: 3em;
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .strategy-card p {
+            font-size: 0.95em;
+            color: rgba(224, 224, 224, 0.8);
+            max-width: 300px;
+        }
+
+        .risk-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .risk-card li {
+            background-color: rgba(255, 193, 7, 0.1); /* Light yellow background for risk items */
+            padding: 10px 15px;
+            border-left: 4px solid var(--hold-color);
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: var(--text-color);
+        }
+
+        .risk-card li strong {
+            color: var(--accent-color);
+        }
+
+        .risk-card p {
+            font-size: 0.9em;
+            color: rgba(224, 224, 224, 0.7);
+            margin-top: 10px;
+        }
+
+        .commentary-card {
+            grid-column: 1 / -1; /* Spans all columns */
+        }
+
+        .commentary-card p {
+            font-size: 1em;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            .strategy-action {
+                width: 120px;
+                height: 120px;
+            }
+            .strategy-action .emoji {
+                font-size: 2.5em;
+            }
+            .card h2 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>종목 분석 대시보드</h1>
+            <p class="subtitle">기간: 2025-11-18 ~ 2025-12-17</p>
+        </header>
+
+        <div class="main-content">
+            <div class="card metrics-card">
+                <h2>주요 지표</h2>
+                <div class="metric-grid">
+                    <div class="metric-item">
+                        <span class="label">누적 수익률</span>
+                        <span class="value positive">📈 +16.45%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="label">최고가</span>
+                        <span class="value highlight">▲ 495.28</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="label">최저가</span>
+                        <span class="value highlight">▼ 383.76</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="label">평균 거래량</span>
+                        <span class="value">📊 80.32M</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card strategy-card">
+                <h2>투자 전략</h2>
+                <div class="strategy-action hold">
+                    <span class="emoji">✋</span>
+                    <h3>보유 (HOLD)</h3>
+                </div>
+                <p>강력한 상승 추세에도 불구하고 최근 고점에서의 변동성 증가를 고려한 전략입니다.</p>
+            </div>
+
+            <div class="card risk-card">
+                <h2>리스크 요인 ⚠️</h2>
+                <ul>
+                    <li>**상단 저항선:** 490.00 - 495.00 (최고가 부근)</li>
+                    <li>**단기 지지선:** 465.00 - 470.00 (최근 하락에서 형성될 수 있는 지지)</li>
+                    <li>**중기 지지선:** 450.00 - 455.00 (직전 상승 전 가격대)</li>
+                </ul>
+                <p>이 가격대에서 매수/매도 압력이 강해질 수 있으므로 유의하십시오.</p>
+            </div>
+
+            <div class="card commentary-card">
+                <h2>전문가 분석 의견 🔬</h2>
+                <p>
+                    본 종목은 분석 기간 동안 견조한 상승 추세를 보이며 +16.45%의 높은 누적 수익률을 기록했습니다. 특히, 주가가 크게 오르던 날 높은 거래량이 동반되어 강한 매수세의 확신을 나타냈습니다. 하지만 마지막 거래일 최고가 부근(495 수준)에서 상당한 차익 실현 매물 출회와 함께 고거래량 하락이 발생했는데, 이는 단기적인 매수세 피로감 및 새로운 저항선 형성 가능성을 시사하며 향후 가격 변동성 확대에 대한 주의 깊은 관찰이 필요합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

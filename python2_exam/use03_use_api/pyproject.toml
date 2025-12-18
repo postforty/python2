@@ -11,8 +11,8 @@ dependencies = [
     "jupyter>=1.1.1",
     "jupyterlab>=4.5.1",
     "openmeteo-requests>=1.7.4",
-    "pandas>=2.3.3",
     "python-dotenv>=1.2.1",
     "requests-cache>=1.2.1",
     "retry-requests>=2.0.0",
+    "yfinance>=0.2.66",
 ]
