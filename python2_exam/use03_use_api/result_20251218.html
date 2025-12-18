@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>오늘의 외출 코디 추천</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #3498db; /* Blue */
+        --secondary-color: #2c3e50; /* Darker blue/grey */
+        --accent-color: #e67e22; /* Orange */
+        --text-color: #333;
+        --bg-light: #ecf0f1; /* Light grey */
+        --bg-white: #ffffff;
+        --border-color: #bdc3c7; /* Light grey border */
+      }
+
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        background-color: var(--bg-light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+        color: var(--text-color);
+        line-height: 1.6;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+
+      .infographic-container {
+        background-color: var(--bg-white);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        width: 100%;
+        max-width: 650px;
+        text-align: center;
+        overflow: hidden;
+        box-sizing: border-box;
+        border: 1px solid var(--border-color);
+      }
+
+      h1 {
+        color: var(--primary-color);
+        font-size: 2.5em;
+        margin-bottom: 30px;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      h1::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: var(--accent-color);
+        border-radius: 2px;
+      }
+
+      .weather-summary,
+      .recommendation-section {
+        background-color: var(--bg-light);
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 30px;
+        border: 1px solid var(--border-color);
+      }
+
+      .weather-summary {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        align-items: center;
+      }
+
+      .weather-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        background-color: var(--bg-white);
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border-color);
+      }
+
+      .weather-item .icon {
+        font-size: 3em;
+        margin-bottom: 5px;
+        line-height: 1; /* Adjust line height for emojis */
+      }
+
+      .weather-item .label {
+        font-size: 0.9em;
+        color: var(--secondary-color);
+        font-weight: 300;
+      }
+
+      .weather-item .value {
+        font-size: 1.3em;
+        font-weight: 700;
+        color: var(--text-color);
+      }
+
+      h2 {
+        color: var(--secondary-color);
+        font-size: 1.8em;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .dress-code-list {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .dress-code-item {
+        background-color: var(--bg-white);
+        border-radius: 15px;
+        padding: 20px 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid var(--border-color);
+      }
+
+      .dress-code-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .dress-code-item .icon {
+        font-size: 4em; /* Larger for clothing items */
+        margin-bottom: 10px;
+        line-height: 1;
+      }
+
+      .dress-code-item .label {
+        font-size: 1.1em;
+        font-weight: 600;
+        color: var(--primary-color);
+        text-align: center;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 600px) {
+        .infographic-container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 2em;
+          margin-bottom: 20px;
+        }
+
+        h1::after {
+          width: 60px;
+        }
+
+        .weather-summary {
+          grid-template-columns: 1fr; /* Stack on small screens */
+        }
+
+        .weather-item {
+          flex-direction: row;
+          justify-content: flex-start;
+          padding: 10px 15px;
+        }
+        .weather-item .icon {
+          font-size: 2.5em;
+          margin-right: 10px;
+          margin-bottom: 0;
+        }
+        .weather-item .details {
+          text-align: left;
+        }
+        .weather-item .value {
+          font-size: 1.2em;
+          margin-left: auto; /* Push value to the right */
+        }
+        .weather-item .label {
+          text-align: left;
+        }
+
+        h2 {
+          font-size: 1.5em;
+          margin-bottom: 15px;
+        }
+
+        .dress-code-list {
+          grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+          gap: 15px;
+        }
+
+        .dress-code-item .icon {
+          font-size: 3.5em;
+        }
+        .dress-code-item .label {
+          font-size: 1em;
+        }
+      }
+      @media (max-width: 400px) {
+        .dress-code-list {
+          grid-template-columns: 1fr; /* Stack clothing items on very small screens */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="infographic-container">
+      <h1>오늘의 외출 코디 추천 👕👖</h1>
+
+      <div class="weather-summary">
+        <div class="weather-item">
+          <span class="icon">🌡️</span>
+          <div class="details">
+            <div class="label">현재 온도</div>
+            <div class="value">10.3°C</div>
+          </div>
+        </div>
+        <div class="weather-item">
+          <span class="icon">☀️</span>
+          <div class="details">
+            <div class="label">날씨</div>
+            <div class="value">맑음</div>
+          </div>
+        </div>
+        <div class="weather-item">
+          <span class="icon">🌬️</span>
+          <div class="details">
+            <div class="label">풍속</div>
+            <div class="value">4.1 m/s</div>
+          </div>
+        </div>
+        <div class="weather-item">
+          <span class="icon">⏰</span>
+          <div class="details">
+            <div class="label">현재 시간</div>
+            <div class="value">12월 18일 16:15</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="recommendation-section">
+        <h2>✨ 추천 코디 ✨</h2>
+        <ul class="dress-code-list">
+          <li class="dress-code-item">
+            <span class="icon">🧥</span>
+            <span class="label">따뜻한 코트/패딩</span>
+          </li>
+          <li class="dress-code-item">
+            <span class="icon">🧶</span>
+            <span class="label">두툼한 스웨터</span>
+          </li>
+          <li class="dress-code-item">
+            <span class="icon">👖</span>
+            <span class="label">기모 바지/두꺼운 바지</span>
+          </li>
+          <li class="dress-code-item">
+            <span class="icon">🧣</span>
+            <span class="label">목도리 (필수!)</span>
+          </li>
+          <li class="dress-code-item">
+            <span class="icon">🧤</span>
+            <span class="label">장갑</span>
+          </li>
+          <li class="dress-code-item">
+            <span class="icon">👟</span>
+            <span class="label">방한화/부츠</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

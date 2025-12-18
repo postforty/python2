@@ -1,0 +1,18 @@
+[project]
+name = "use03-use-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "geopy>=2.4.1",
+    "google-genai>=1.56.0",
+    "ipykernel>=7.1.0",
+    "jupyter>=1.1.1",
+    "jupyterlab>=4.5.1",
+    "openmeteo-requests>=1.7.4",
+    "pandas>=2.3.3",
+    "python-dotenv>=1.2.1",
+    "requests-cache>=1.2.1",
+    "retry-requests>=2.0.0",
+]
