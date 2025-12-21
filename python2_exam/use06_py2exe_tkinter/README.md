@@ -2,6 +2,9 @@
 
 파이썬 파일을 실행가능한 exe로 변환.
 
+URL: <https://pypi.org/project/auto-py-to-exe/>
+
 ```bash
 pip install auto-py-to-exe
 ```
+
