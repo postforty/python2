@@ -1,5 +1,6 @@
 # 초보자를 위한 파이썬 Todo List 예제
 # 리스트와 딕셔너리를 사용하여 할 일 목록을 관리하는 프로그램입니다.
+# 함수, 딕셔너리, 리스트, input, print, 예외처리, while, if, enumerate
 
 def print_menu():
     """사용 가능한 메뉴를 출력합니다."""
@@ -67,14 +68,16 @@ def delete_task(todos):
         return
 
     try:
-        index = int(input("\n삭제할 할 일의 번호를 입력하세요: "))
-        if 1 <= index <= len(todos):
-            removed_todo = todos.pop(index - 1)
-            print(f"'{removed_todo['title']}' 할 일이 삭제되었습니다.")
-        else:
-            print("잘못된 번호입니다.")
+        index = int(input("\n완료할 할 일의 번호를 입력하세요: "))
+
+        removed_todo = todos.pop(index - 1)
+        print(f"[{removed_todo["title"]}] 할 일이 삭제되었습니다.")
+    except IndexError:
+        print("잘못된 번호입니다.")
     except ValueError:
-        print("숫자를 입력해주세요.")
+        print("숫자를 입력해 주세요.")
+    except Exception:
+        print("알 수 없는 오류입니다.")
 
 def main():
     """프로그램의 메인 로직입니다."""
