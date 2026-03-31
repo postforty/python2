@@ -11,7 +11,8 @@ print(arr)
 # (1) 임의의 이미지를 생성하거나 로드하여 RGB로 변환합니다.
 # 실습을 위해 400x300 크기의 검은색 이미지를 생성합니다.
 print("\n--- 이미지 로드 및 전처리 연습 ---")
-image = Image.new("RGB", (400, 300), color=(0, 0, 0)) # Image.open("img.jpg").convert("RGB")와 동일 효과
+# image = Image.new("RGB", (400, 300), color=(0, 0, 0)) # Image.open("img.jpg").convert("RGB")와 동일 효과
+image = Image.open("images/cat_2.jpg").convert("RGB")
 print(f"원본 이미지 크기: {image.size}")
 
 # (2) 224x224 크기로 리사이징 및 중심 정렬 크롭 (ImageOps.fit)
