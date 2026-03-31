@@ -24,10 +24,12 @@ print(f"전처리 후 이미지 크기: {image.size}")
 # (3) 이미지를 넘파이 배열로 변환합니다.
 image_array = np.asarray(image)
 print(f"넘파이 배열 형태: {image_array.shape}") # (224, 224, 3) -> 높이, 너비, RGB 채널
+print(f"넘파이 배열 형태: {image_array}")
 
 # 3. 이미지 데이터 정규화 연습
 # (1) 실제 픽셀 값(0~255) 대신 연습용 데이터를 사용합니다.
-data = np.array([0, 128, 255]) 
+# data = np.array([0, 128, 255]) 
+data = np.array(image_array[0, 0]) # 이미지의 첫 번째 픽셀(좌상단) RGB 값 예시
 print(f"\n원본 데이터: {data}")
 
 # (2) 이미지 전처리 공식 적용: (데이터 / 127.5) - 1
