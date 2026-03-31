@@ -2,7 +2,7 @@ import os
 import glob
 
 # 1. 현재 파일이 위치한 폴더 경로 가져오기
-base_path = os.path.dirname(__file__)
+base_path = os.path.dirname(os.path.abspath(__file__))
 target_path = os.path.join(base_path, "images") # 실습용 images 폴더
 
 print(f"조회할 폴더: {target_path}")
