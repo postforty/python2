@@ -68,10 +68,10 @@ def delete_task(todos):
         return
 
     try:
-        index = int(input("\n완료할 할 일의 번호를 입력하세요: "))
+        index = int(input("\n삭제할 할 일의 번호를 입력하세요: "))
 
         removed_todo = todos.pop(index - 1)
-        print(f"[{removed_todo["title"]}] 할 일이 삭제되었습니다.")
+        print(f"[{removed_todo['title']}] 할 일이 삭제되었습니다.")
     except IndexError:
         print("잘못된 번호입니다.")
     except ValueError:
