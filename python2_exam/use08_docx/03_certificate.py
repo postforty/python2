@@ -27,14 +27,14 @@ def set_font(run, font_name, font_size, bold=False):
     run.font.size = docx.shared.Pt(font_size)
     run.bold = bold
 
-set_font(run, "HY궁서", 20)
+set_font(run, "궁서", 20)
 
 para = doc.add_paragraph()
 run = para.add_run("\n")
 run = para.add_run("수 료 증")
 run.bold = True
-run.font.name = "HY궁서"
-run._element.rPr.rFonts.set(qn("w:eastAsia"), "HY궁서")
+run.font.name = "궁서"
+run._element.rPr.rFonts.set(qn("w:eastAsia"), "궁서")
 run.font.size = docx.shared.Pt(40)
 para.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
